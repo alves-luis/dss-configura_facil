@@ -1,2 +1,2 @@
 # Configura Fácil
-Projeto realizado no âmbito da disciplina de Desenvolvimento de Sistemas de Software. Muito giro.
+Projeto realizado no âmbito da UC de Desenvolvimento de Sistemas de Software. Muito giro.
