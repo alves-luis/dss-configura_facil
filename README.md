@@ -1,2 +1,2 @@
-# Configura-Facil
-Para a realização do ConfiguraFacil
+# Configura Fácil
+Projeto realizado no âmbito da disciplina de Desenvolvimento de Sistemas de Software. Muito giro.
