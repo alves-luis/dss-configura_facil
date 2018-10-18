@@ -1,0 +1,31 @@
+- Carro;
+- Pintura;
+- Jantes;
+- Pneus;
+- Motor;
+- Detalhes exteriores:
+  - Vidros escurecidos;
+  - Para-choques;
+  - Teto de abrir;
+- Detalhes interiores:
+  - Estofos;
+  - Pacote de luzes;
+  - Aquecimento de bancos;
+- Preço;
+- Incompatibilidade (relação);
+- Requer (relação);
+- Pacote Sport:
+  - Jantes;
+  - Pneu específico;
+  - Amortecedor duro;
+  - Spoilers;
+  - Para-choques novos;
+  - Escape com duas ponteiras
+- Pacote Confort:
+  - Bancos elétricos;
+  - Ar condicionado de 4 zonas;
+  - Pacote de luzes interiores;
+  - Espelhos retrovisores com mecanismo de anti-encandeamento;
+- Comprador;
+- Stock;
+- Queue de configurações;
