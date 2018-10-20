@@ -29,3 +29,6 @@
 - Comprador;
 - Stock;
 - Queue de configurações;
+
+CONFIGURAÇÃO ÓPTIMA
+-Dinheiro a gastar;    
