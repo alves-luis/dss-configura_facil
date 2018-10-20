@@ -3,14 +3,44 @@
 - Jantes;
 - Pneus;
 - Motor;
+- Configuração;
 - Detalhes exteriores:
-  - Vidros escurecidos;
-  - Para-choques;
-  - Teto de abrir;
+  - Jantes:
+      - Liga leve;
+      - Fundidas;
+      - Forjadas;
+      - Modulares
+      - Aço
+      - Alumínio;
+  - Tejadilho:
+      - Panorâmico fixo;
+      - Panorâmico móvel;
+      - Sem abertura;
+  - Vidros:
+      - Temperado;
+      - Escurecido;
+  - Para-brisa:
+      - Refletor de infravermelhos;
+      - Aquecido;
+  - Para-choque;
+  - Limpa brisa com sensor de chuva;
 - Detalhes interiores:
-  - Estofos;
+  - Assento:
+      - Bancos de série;
+      - Bancos dianteiros aquecidos;
+      - Bancos dianteiros e traseiros aquecidos;
+  - Estofos:
+      - Couro;
+      - Tecido;
+      - Pele;
   - Pacote de luzes;
-  - Aquecimento de bancos;
+  - Smoker's pack
+  - Conjunto de tapetes;
+  - Radio digital;
+- Funcionalidades:
+  - Park assist;
+  - Câmara traseira;
+  - Sensor de intrusão;
 - Preço;
 - Incompatibilidade (relação);
 - Requer (relação);
@@ -29,6 +59,8 @@
 - Comprador;
 - Stock;
 - Queue de configurações;
+- Utilizador;
+- Operador (na fábrica);
 
 CONFIGURAÇÃO ÓPTIMA
 -Dinheiro a gastar;    
