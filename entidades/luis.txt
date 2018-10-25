@@ -1,4 +1,5 @@
 - Carro;
+- Modelo;
 - Pintura;
 - Jantes;
 - Pneus;
@@ -63,4 +64,4 @@
 - Operador (na fábrica);
 
 CONFIGURAÇÃO ÓPTIMA
--Dinheiro a gastar;    
+-Dinheiro a gastar;
