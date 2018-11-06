@@ -21,3 +21,16 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+*.lck
+diagramas/.DS_Store
+*.bak_000f
+*.bak_000d
+*.bak_001f
+*.bak_002d
+*.bak_003d
+*.bak_004d
+*.bak_006d
+*.bak_007d
+*.bak_008d
+*.bak_005d
+*.bak_009d
