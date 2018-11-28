@@ -6,28 +6,29 @@
 package view.componenteprimario;
 
 import business.Facade;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 import view.menus.MenuPrincipal;
 
 /**
  *
  * @author Luís Alves
  */
-public class ListaComponentesPrimariosSelecionaveis extends javax.swing.JFrame {
+public class ListaPrimariosSelecionaveis extends javax.swing.JPanel {
 
-    
     private Facade facade;
+    private SelecionaComponentePrimario parent;
+    private JPanel cardPanel;
     
     /**
-     * Creates new form ListaComponentesPrimariosSelecionaveis
+     * Creates new form ListaPrimariosSelecionaveis
      */
-    public ListaComponentesPrimariosSelecionaveis(Facade f) {
+    public ListaPrimariosSelecionaveis(Facade f, SelecionaComponentePrimario parent) {
         this.facade = f;
-        this.setResizable(false);
+        this.parent = parent;
+        this.cardPanel = parent.getCardPanel();
         initComponents();
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.parent.setTitle("Componentes Selecionáveis");
     }
 
     /**
@@ -39,30 +40,14 @@ public class ListaComponentesPrimariosSelecionaveis extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelComponentes = new javax.swing.JLabel();
-        labelModelos = new javax.swing.JLabel();
-        scrollListaComponentes = new javax.swing.JScrollPane();
-        listaComponentes = new javax.swing.JList<>();
         scrollListaModelos = new javax.swing.JScrollPane();
         listaModelos = new javax.swing.JList<>();
         butaoSair = new javax.swing.JButton();
         butaoSelecionar = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setName("Componentes Primários Selecionáveis"); // NOI18N
-
-        labelComponentes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        labelComponentes.setText("Componentes");
-
-        labelModelos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        labelModelos.setText("Modelos");
-
-        listaComponentes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        scrollListaComponentes.setViewportView(listaComponentes);
+        labelComponentes = new javax.swing.JLabel();
+        labelModelos = new javax.swing.JLabel();
+        scrollListaComponentes = new javax.swing.JScrollPane();
+        listaComponentes = new javax.swing.JList<>();
 
         listaModelos.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -85,8 +70,21 @@ public class ListaComponentesPrimariosSelecionaveis extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        labelComponentes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelComponentes.setText("Componentes");
+
+        labelModelos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelModelos.setText("Modelos");
+
+        listaComponentes.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        scrollListaComponentes.setViewportView(listaComponentes);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -97,7 +95,7 @@ public class ListaComponentesPrimariosSelecionaveis extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(labelComponentes)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(labelModelos)
@@ -131,20 +129,25 @@ public class ListaComponentesPrimariosSelecionaveis extends javax.swing.JFrame {
                     .addComponent(butaoSelecionar))
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void butaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoSairActionPerformed
-        this.dispose();
-        facade.cancelaConfiguracao();
+        this.parent.dispose();
         (new MenuPrincipal(facade)).setVisible(true);
     }//GEN-LAST:event_butaoSairActionPerformed
 
     private void butaoSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoSelecionarActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        (new ListaComponentesPrimariosExtra(facade)).setVisible(true);
+        // add logic here
+        CardLayout cl = (CardLayout) cardPanel.getLayout();
+        // if needs extra
+            cardPanel.add(new ListaPrimariosExtra(facade,parent),"EXTRA");
+            cl.show(cardPanel,"EXTRA");
+        // if incompativel com selecionados
+            //cardPanel.add(new ListaPrimariosIncompativeis(facade,parent),"INCOMPATIVEL");
+            //cl.show(cardPanel,"INCOMPATIVEL");
+        // else
+            //cardPanel.add(new ApresentaPrecoPrimario(facade,parent),"PRECO");
+            //cl.show(cardPanel,"PRECO");
     }//GEN-LAST:event_butaoSelecionarActionPerformed
 
 

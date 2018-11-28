@@ -6,26 +6,28 @@
 package view.componenteprimario;
 
 import business.Facade;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Luís Alves
  */
-public class ListaComponentesPrimariosIncompativeis extends javax.swing.JFrame {
+public class ListaPrimariosIncompativeis extends javax.swing.JPanel {
 
     private Facade facade;
+    private SelecionaComponentePrimario parent;
+    private JPanel cardPanel;
     
     /**
-     * Creates new form ListaComponentesPrimariosIncompativeis
+     * Creates new form ListaPrimariosIncompativeis
      */
-    public ListaComponentesPrimariosIncompativeis(Facade f) {
+    public ListaPrimariosIncompativeis(Facade f, SelecionaComponentePrimario c) {
         this.facade = f;
+        this.parent = c;
+        this.cardPanel = parent.getCardPanel();
+        parent.setTitle("Componentes Incompatíveis");
         initComponents();
-        this.setResizable(false);
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     /**
@@ -37,14 +39,21 @@ public class ListaComponentesPrimariosIncompativeis extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextArea1 = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         butaoRetirar = new javax.swing.JButton();
-        butaoCancelar1 = new javax.swing.JButton();
-        jTextArea1 = new javax.swing.JTextArea();
+        butaoCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setName("Componente Primário Incompatível"); // NOI18N
+        jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(204, 204, 204));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("  O componente escolhido é                    incompatível com os seguintes              componentes:");
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -60,20 +69,15 @@ public class ListaComponentesPrimariosIncompativeis extends javax.swing.JFrame {
             }
         });
 
-        butaoCancelar1.setText("Cancelar");
+        butaoCancelar.setText("Cancelar");
+        butaoCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butaoCancelarActionPerformed(evt);
+            }
+        });
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setBackground(new java.awt.Color(204, 204, 204));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("  O componente escolhido é                    incompatível com os seguintes              componentes:");
-        jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -81,9 +85,9 @@ public class ListaComponentesPrimariosIncompativeis extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextArea1)
                     .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(butaoCancelar1, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                    .addComponent(butaoCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
                     .addComponent(butaoRetirar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -92,28 +96,30 @@ public class ListaComponentesPrimariosIncompativeis extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(butaoRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(74, 74, 74)
-                        .addComponent(butaoCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(butaoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void butaoRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoRetirarActionPerformed
-
-        this.dispose();
-        (new ApresentaPrecoPrimario(facade)).setVisible(true);
+        // TODO
     }//GEN-LAST:event_butaoRetirarActionPerformed
+
+    private void butaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoCancelarActionPerformed
+        cardPanel.add(new ListaPrimariosSelecionados(facade,parent),"SELECIONADOS");
+        CardLayout cl = (CardLayout) cardPanel.getLayout();
+        cl.show(cardPanel,"SELECIONADOS");
+    }//GEN-LAST:event_butaoCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton butaoCancelar1;
+    private javax.swing.JButton butaoCancelar;
     private javax.swing.JButton butaoRetirar;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;

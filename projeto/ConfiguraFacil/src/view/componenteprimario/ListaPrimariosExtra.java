@@ -6,25 +6,28 @@
 package view.componenteprimario;
 
 import business.Facade;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Luís Alves
  */
-public class ListaComponentesPrimariosExtra extends javax.swing.JFrame {
+public class ListaPrimariosExtra extends javax.swing.JPanel {
 
     private Facade facade;
+    private SelecionaComponentePrimario parent;
+    private JPanel cardPanel;
+    
     /**
-     * Creates new form ListaComponentesPrimariosExtra
+     * Creates new form ListaPrimariosExtra
      */
-    public ListaComponentesPrimariosExtra(Facade f) {
+    public ListaPrimariosExtra(Facade f, SelecionaComponentePrimario c) {
         this.facade = f;
+        this.parent = c;
+        this.cardPanel = parent.getCardPanel();
+        this.parent.setTitle("Componentes Extra");
         initComponents();
-        this.setResizable(false);
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     /**
@@ -42,11 +45,8 @@ public class ListaComponentesPrimariosExtra extends javax.swing.JFrame {
         listaComponentesExtra = new javax.swing.JList<>();
         scrollListaModelosExtra = new javax.swing.JScrollPane();
         listaModelosExtra = new javax.swing.JList<>();
-        butaoCancelar = new javax.swing.JButton();
         butaoAdicionar = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setName("Componente Primário Requer Extra"); // NOI18N
+        butaoCancelar = new javax.swing.JButton();
 
         labelComponentesExtra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelComponentesExtra.setText("Componentes Extra");
@@ -68,13 +68,6 @@ public class ListaComponentesPrimariosExtra extends javax.swing.JFrame {
         });
         scrollListaModelosExtra.setViewportView(listaModelosExtra);
 
-        butaoCancelar.setText("Cancelar");
-        butaoCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                butaoCancelarActionPerformed(evt);
-            }
-        });
-
         butaoAdicionar.setText("Adicionar");
         butaoAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,8 +75,15 @@ public class ListaComponentesPrimariosExtra extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        butaoCancelar.setText("Cancelar");
+        butaoCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butaoCancelarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -98,7 +98,7 @@ public class ListaComponentesPrimariosExtra extends javax.swing.JFrame {
                             .addComponent(scrollListaModelosExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelModelosExtra)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(197, Short.MAX_VALUE)
+                        .addContainerGap(205, Short.MAX_VALUE)
                         .addComponent(butaoAdicionar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(butaoCancelar)))
@@ -108,9 +108,9 @@ public class ListaComponentesPrimariosExtra extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelComponentesExtra)
-                    .addComponent(labelModelosExtra))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelComponentesExtra, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelModelosExtra, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -124,22 +124,17 @@ public class ListaComponentesPrimariosExtra extends javax.swing.JFrame {
                     .addComponent(butaoAdicionar))
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void butaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoCancelarActionPerformed
-        this.dispose();
-        facade.cancelaPrimario();
-        //(new ListaComponentesPrimariosSelecionados(facade)).setVisible(true);
-        
-    }//GEN-LAST:event_butaoCancelarActionPerformed
 
     private void butaoAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoAdicionarActionPerformed
         // TODO add your handling code here:
-        this.dispose();
-        (new ListaComponentesPrimariosIncompativeis(facade)).setVisible(true);
     }//GEN-LAST:event_butaoAdicionarActionPerformed
+
+    private void butaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoCancelarActionPerformed
+        cardPanel.add(new ListaPrimariosSelecionaveis(facade,parent),"SELECIONAVEIS");
+        CardLayout cl = (CardLayout) cardPanel.getLayout();
+        cl.show(cardPanel,"SELECIONAVEIS");
+    }//GEN-LAST:event_butaoCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
