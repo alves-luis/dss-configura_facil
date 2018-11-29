@@ -3,23 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.menus;
+package view.configotima;
 
 import business.Facade;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Luís Alves
  */
-public class MenuEscolha extends javax.swing.JFrame {
+public class SelecionaConfiguracaoOtima extends javax.swing.JFrame {
 
-    private Facade f;
+    private Facade facade;
+    
+    private void centerFrame() {
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+    }
+    
     /**
-     * Creates new form MenuEscolha
+     * Creates new form SelecionaConfiguracaoOtima
      */
-    public MenuEscolha(Facade f) {
-        this.f = f;
+    public SelecionaConfiguracaoOtima(Facade f) {
+        facade = f;
         initComponents();
+        cardPanel.add(new InsereValorObjetivo(f,this),"INSERE");
+        CardLayout cl = (CardLayout) cardPanel.getLayout();
+        cl.show(cardPanel,"INSERE");
+    }
+    
+    public JPanel getCardPanel() {
+        return this.cardPanel;
     }
 
     /**
@@ -31,17 +46,25 @@ public class MenuEscolha extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cardPanel = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        cardPanel.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -49,5 +72,6 @@ public class MenuEscolha extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel cardPanel;
     // End of variables declaration//GEN-END:variables
 }
