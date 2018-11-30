@@ -4,9 +4,7 @@
 package view.menus;
 
 import business.Facade;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import view.componenteprimario.ListaComponentesPrimariosSelecionaveis;
+import view.componenteprimario.SelecionaComponentePrimario;
 
 /**
  *
@@ -16,15 +14,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     
     private Facade facade;
 
+    private void centerFrame() {
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+    }
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal(Facade f) {
         this.facade = f;
         initComponents();
-        this.setResizable(false);
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.centerFrame();
     }
 
     /**
@@ -98,7 +98,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void configuraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuraActionPerformed
         this.dispose();
-        (new ListaComponentesPrimariosSelecionaveis(facade)).setVisible(true);
+        (new SelecionaComponentePrimario(facade)).setVisible(true);
     }//GEN-LAST:event_configuraActionPerformed
 
 

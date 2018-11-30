@@ -6,26 +6,28 @@
 package view.componenteprimario;
 
 import business.Facade;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Luís Alves
  */
-public class ApresentaPrecoPrimario extends javax.swing.JFrame {
+public class ApresentaPrecoPrimario extends javax.swing.JPanel {
 
     private Facade facade;
+    private SelecionaComponentePrimario parent;
+    private JPanel cardPanel;
     
     /**
      * Creates new form ApresentaPrecoPrimario
      */
-    public ApresentaPrecoPrimario(Facade f) {
+    public ApresentaPrecoPrimario(Facade f, SelecionaComponentePrimario c) {
         this.facade = f;
+        this.parent = c;
+        this.cardPanel = parent.getCardPanel();
+        parent.setTitle("Preço");
         initComponents();
-        this.setResizable(false);
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     /**
@@ -42,12 +44,10 @@ public class ApresentaPrecoPrimario extends javax.swing.JFrame {
         listaAAdicionar = new javax.swing.JList<>();
         labelPrecoExtras = new javax.swing.JLabel();
         labelActualPrecoExtras = new javax.swing.JLabel();
-        butaoAdicionar = new javax.swing.JButton();
-        butaoCancelar = new javax.swing.JButton();
         labelPrecoTotal = new javax.swing.JLabel();
         labelActualPrecoTotal = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        butaoAdicionar = new javax.swing.JButton();
+        butaoCancelar = new javax.swing.JButton();
 
         labelComponentesAAdicionar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelComponentesAAdicionar.setText("Componentes a Adicionar");
@@ -69,6 +69,16 @@ public class ApresentaPrecoPrimario extends javax.swing.JFrame {
         labelActualPrecoExtras.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         labelActualPrecoExtras.setOpaque(true);
 
+        labelPrecoTotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelPrecoTotal.setText("Preço Total");
+
+        labelActualPrecoTotal.setBackground(new java.awt.Color(255, 255, 255));
+        labelActualPrecoTotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelActualPrecoTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelActualPrecoTotal.setText("15500€");
+        labelActualPrecoTotal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelActualPrecoTotal.setOpaque(true);
+
         butaoAdicionar.setText("Adicionar");
         butaoAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,18 +93,8 @@ public class ApresentaPrecoPrimario extends javax.swing.JFrame {
             }
         });
 
-        labelPrecoTotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        labelPrecoTotal.setText("Preço Total");
-
-        labelActualPrecoTotal.setBackground(new java.awt.Color(255, 255, 255));
-        labelActualPrecoTotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        labelActualPrecoTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelActualPrecoTotal.setText("15500€");
-        labelActualPrecoTotal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        labelActualPrecoTotal.setOpaque(true);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -108,7 +108,7 @@ public class ApresentaPrecoPrimario extends javax.swing.JFrame {
                     .addComponent(labelActualPrecoExtras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labelPrecoTotal)
                     .addComponent(labelActualPrecoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(butaoAdicionar)
@@ -140,8 +140,6 @@ public class ApresentaPrecoPrimario extends javax.swing.JFrame {
                     .addComponent(butaoCancelar))
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void butaoAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoAdicionarActionPerformed
@@ -149,9 +147,9 @@ public class ApresentaPrecoPrimario extends javax.swing.JFrame {
     }//GEN-LAST:event_butaoAdicionarActionPerformed
 
     private void butaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoCancelarActionPerformed
-        this.dispose();
-        facade.cancelaPrimario();
-        (new ListaComponentesPrimariosSelecionados(facade)).setVisible(true);
+        cardPanel.add(new ListaPrimariosSelecionados(facade,parent),"SELECIONADOS");
+        CardLayout cl = (CardLayout) cardPanel.getLayout();
+        cl.show(cardPanel,"SELECIONADOS");
     }//GEN-LAST:event_butaoCancelarActionPerformed
 
 

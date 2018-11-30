@@ -6,27 +6,27 @@
 package view.componenteprimario;
 
 import business.Facade;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import view.menus.MenuPrincipal;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Luís Alves
  */
-public class ListaComponentesPrimariosSelecionados extends javax.swing.JFrame {
+public class ListaPrimariosSelecionados extends javax.swing.JPanel {
 
     private Facade facade;
+    private SelecionaComponentePrimario parent;
+    private JPanel cardPanel;
     
     /**
-     * Creates new form ApresentaPrecoPrimario
+     * Creates new form ListaPrimariosSelecionados
      */
-    public ListaComponentesPrimariosSelecionados(Facade f) {
+    public ListaPrimariosSelecionados(Facade f, SelecionaComponentePrimario c) {
         this.facade = f;
+        this.parent = c;
+        this.cardPanel = c.getCardPanel();
+        parent.setTitle("Componentes Selecionados");
         initComponents();
-        this.setResizable(false);
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     /**
@@ -38,20 +38,14 @@ public class ListaComponentesPrimariosSelecionados extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelSelecionados = new javax.swing.JLabel();
         scrollListaSelecionados = new javax.swing.JScrollPane();
         listaSelecionados = new javax.swing.JList<>();
+        labelSelecionados = new javax.swing.JLabel();
         labelPrecoAtual = new javax.swing.JLabel();
         labelPreco = new javax.swing.JLabel();
         butaoAdicionarMais = new javax.swing.JButton();
         butaoConfirmar = new javax.swing.JButton();
         butaoSair = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setName("Componentes Primários Selecionados"); // NOI18N
-
-        labelSelecionados.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        labelSelecionados.setText("Componentes Selecionados");
 
         listaSelecionados.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -59,6 +53,9 @@ public class ListaComponentesPrimariosSelecionados extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         scrollListaSelecionados.setViewportView(listaSelecionados);
+
+        labelSelecionados.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelSelecionados.setText("Componentes Selecionados");
 
         labelPrecoAtual.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelPrecoAtual.setText("Preço Atual");
@@ -87,8 +84,8 @@ public class ListaComponentesPrimariosSelecionados extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -133,8 +130,6 @@ public class ListaComponentesPrimariosSelecionados extends javax.swing.JFrame {
                     .addComponent(butaoSair))
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void butaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoConfirmarActionPerformed
@@ -142,11 +137,8 @@ public class ListaComponentesPrimariosSelecionados extends javax.swing.JFrame {
     }//GEN-LAST:event_butaoConfirmarActionPerformed
 
     private void butaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoSairActionPerformed
-        this.dispose();
-        facade.cancelaConfiguracao();
-        (new MenuPrincipal(facade)).setVisible(true);
+        // TODO add your handling code here:
     }//GEN-LAST:event_butaoSairActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
