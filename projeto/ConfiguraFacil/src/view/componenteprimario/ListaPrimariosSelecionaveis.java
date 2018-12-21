@@ -178,7 +178,7 @@ public class ListaPrimariosSelecionaveis extends javax.swing.JPanel {
       ComponentePrimario prim = facade.getPrimariosSelecionaveis().get(comp);
       Modelo modelo = facade.getModelo(prim.getModelos().get(mod));
       List<Componente> extra = facade.getExtra(modelo.getCod());
-      List<Componente> incompatible = facade.getIncompativeis(modelo.getCod());
+      List<Componente> incompatible = facade.getIncompativeisFromSelected(modelo.getCod());
       if (extra.size() > 0) {
         cardPanel.add(new ListaPrimariosExtra(facade, parent), "EXTRA");
         cl.show(cardPanel, "EXTRA");
@@ -186,6 +186,7 @@ public class ListaPrimariosSelecionaveis extends javax.swing.JPanel {
         cardPanel.add(new ListaPrimariosIncompativeis(facade, parent), "INCOMPATIVEL");
         cl.show(cardPanel, "INCOMPATIVEL");
       } else {
+        facade.adicionaCompTemporario(modelo);
         cardPanel.add(new ApresentaPrecoPrimario(facade, parent), "PRECO");
         cl.show(cardPanel, "PRECO");
       }

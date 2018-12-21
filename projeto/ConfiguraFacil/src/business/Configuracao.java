@@ -9,8 +9,8 @@ public class Configuracao {
 
   private double tempPrice;
   private double finalPrice;
-  public ArrayList<Componente> tempSelected;
-  public ArrayList<Componente> selected;
+  private ArrayList<Componente> tempSelected;
+  private ArrayList<Componente> selected;
 
   public Configuracao() {
     tempPrice = 0;
@@ -27,6 +27,14 @@ public class Configuracao {
         r.add(i);
     }
     return r;
+  }
+  
+  public List<Componente> getTemporarySelected() {
+    return this.tempSelected;
+  }
+  
+  public List<Componente> getSelected() {
+    return this.selected;
   }
 
   public void temporaryAddComponent(Componente comp) {
@@ -51,6 +59,10 @@ public class Configuracao {
 
   public double getTempPrice() {
     return this.tempPrice;
+  }
+  
+  public double getFinalPrice() {
+    return this.finalPrice;
   }
 
   public void updateTempToFinal() {

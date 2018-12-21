@@ -5,8 +5,10 @@
  */
 package view.componenteprimario;
 
+import business.Componente;
 import business.Facade;
 import java.awt.CardLayout;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -22,12 +24,32 @@ public class ApresentaPrecoPrimario extends javax.swing.JPanel {
     /**
      * Creates new form ApresentaPrecoPrimario
      */
-    public ApresentaPrecoPrimario(Facade f, SelecionaComponentePrimario c) {
-        this.facade = f;
-        this.parent = c;
-        this.cardPanel = parent.getCardPanel();
-        parent.setTitle("Preço");
-        initComponents();
+  public ApresentaPrecoPrimario(Facade f, SelecionaComponentePrimario c) {
+    this.facade = f;
+    this.parent = c;
+    this.cardPanel = parent.getCardPanel();
+    parent.setTitle("Preço");
+    initComponents();
+    List<Componente> selecionados = facade.getPreSelected();
+    String[] comps = new String[selecionados.size()];
+    for (int i = 0; i < comps.length; i++) {
+      comps[i] = selecionados.get(i).getName();
+    }
+    listaAAdicionar.setModel(new javax.swing.AbstractListModel<String>() {
+      String[] strings = comps;
+
+      public int getSize() {
+        return strings.length;
+      }
+
+      public String getElementAt(int i) {
+        return strings[i];
+      }
+    });
+    double tempPrice = facade.getPrecoTemporario();
+    double finalPrice = facade.getPrecoFinal() + tempPrice;
+    labelActualPrecoExtras.setText(tempPrice + "");
+    labelActualPrecoTotal.setText(finalPrice+"");
     }
 
     /**
@@ -143,13 +165,17 @@ public class ApresentaPrecoPrimario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void butaoAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoAdicionarActionPerformed
-        // TODO add your handling code here:
+      this.facade.confirmaComponentes();
+      cardPanel.add(new ListaPrimariosSelecionados(facade, parent), "SELECIONADOS");
+      CardLayout cl = (CardLayout) cardPanel.getLayout();
+      cl.show(cardPanel, "SELECIONADOS");
     }//GEN-LAST:event_butaoAdicionarActionPerformed
 
     private void butaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoCancelarActionPerformed
-        cardPanel.add(new ListaPrimariosSelecionados(facade,parent),"SELECIONADOS");
-        CardLayout cl = (CardLayout) cardPanel.getLayout();
-        cl.show(cardPanel,"SELECIONADOS");
+      this.facade.cancelaConfiguracao();
+      cardPanel.add(new ListaPrimariosSelecionados(facade, parent), "SELECIONADOS");
+      CardLayout cl = (CardLayout) cardPanel.getLayout();
+      cl.show(cardPanel, "SELECIONADOS");
     }//GEN-LAST:event_butaoCancelarActionPerformed
 
 

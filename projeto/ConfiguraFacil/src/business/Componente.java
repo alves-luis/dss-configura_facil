@@ -56,4 +56,8 @@ public class Componente {
   public void addStock(int qt) {
     this.stock += qt;
   }
+  
+  public void addIncompatibility(int in) {
+    this.incompativeis.add(in);
+  }
 }

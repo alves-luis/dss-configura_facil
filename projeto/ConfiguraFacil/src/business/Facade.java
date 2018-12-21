@@ -25,6 +25,12 @@ public class Facade {
     Modelo m1 = new Modelo(3,"Modelo a",4);
     Modelo m2 = new Modelo(4,"Modelo b",5);
     Modelo m3 = new Modelo(5,"Modelo c",6);
+    m1.addIncompatibility(0);
+    m1.addIncompatibility(3);
+    m2.addIncompatibility(4);
+    m2.addIncompatibility(1);
+    m3.addIncompatibility(5);
+    m3.addIncompatibility(2);
     c1.addModelo(m1);
     c2.addModelo(m2);
     c3.addModelo(m3);
@@ -40,10 +46,6 @@ public class Facade {
     this.compPrimarios.add(c1);
     this.compPrimarios.add(c2);
     this.compPrimarios.add(c3);
-    this.adicionaCompTemporario(c3);
-    this.adicionaCompTemporario(c2);
-    this.adicionaCompTemporario(c1);
-    this.confirmaComponentes();
   }
 
   /**
@@ -146,6 +148,20 @@ public class Facade {
     }
     return r;
   }
+  
+  /**
+   * Given a code of component, returns the components already selected that are incompatible
+   * @param codComp
+   * @return
+   */
+  public List<Componente> getIncompativeisFromSelected(int codComp) {
+    ArrayList<Componente> r = new ArrayList<>();
+    List<Componente> sel = this.currentConfig.getSelected();
+    for(Componente c: sel)
+      if (c.getIncompatible().contains(codComp))
+        r.add(c);
+    return r;
+  }
 
   /**
    * Returns a list of all the components in the system
@@ -200,6 +216,22 @@ public class Facade {
    */
   public void adicionaStock(int qt, int codComp) {
     throw new UnsupportedOperationException();
+  }
+  
+  /**
+   * Returns the components that are temporary
+   * @return
+   */
+  public List<Componente> getPreSelected() {
+    return this.currentConfig.getTemporarySelected();
+  }
+  
+  public double getPrecoFinal() {
+    return this.currentConfig.getFinalPrice();
+  }
+
+  public List<Componente> getSelecionados() {
+    return this.currentConfig.getSelected();
   }
 
 }
