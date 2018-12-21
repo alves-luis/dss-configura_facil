@@ -17,5 +17,10 @@ public class ComponentePrimario extends Componente {
     return this.modelos.stream().map(m -> m.getCod()).collect(Collectors.toList());
   }
   
+  public void addModelo(Modelo m) {
+    if (m != null)
+      this.modelos.add(m);
+  }
+  
   
 }

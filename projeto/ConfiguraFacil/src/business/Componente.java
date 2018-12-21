@@ -10,6 +10,7 @@ public class Componente {
   private double price;
   private ArrayList<Integer> extras;
   private ArrayList<Integer> incompativeis;
+  private int stock;
 
   public Componente(int id, String name, double price) {
     this.id = id;
@@ -17,6 +18,7 @@ public class Componente {
     this.price = price;
     this.extras = new ArrayList<>();
     this.incompativeis = new ArrayList<>();
+    stock = 0;
   }
 
   public List<Integer> getExtra() {
@@ -49,5 +51,9 @@ public class Componente {
 
   public void setPrice(double price) {
     this.price = price;
+  }
+  
+  public void addStock(int qt) {
+    this.stock += qt;
   }
 }

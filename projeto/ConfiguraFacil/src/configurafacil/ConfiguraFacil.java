@@ -16,6 +16,7 @@ public class ConfiguraFacil {
      */
     public static void main(String[] args) {
         Facade f = new Facade();
+        
         MenuPrincipal mainMenu = new MenuPrincipal(f);
         
         mainMenu.setVisible(true);
