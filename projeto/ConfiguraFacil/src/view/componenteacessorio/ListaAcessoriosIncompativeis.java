@@ -35,6 +35,17 @@ public class ListaAcessoriosIncompativeis extends javax.swing.JPanel {
         for (int i = 0; i < comps.length; i++) {
             comps[i] = incomps.get(i).getName();
         }
+        listaIncompatíveis.setModel(new javax.swing.AbstractListModel<String>() {
+        String[] strings = comps;
+
+        public int getSize() {
+          return strings.length;
+        }
+
+        public String getElementAt(int i) {
+          return strings[i];
+        }
+      });
     }
 
     

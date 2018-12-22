@@ -36,6 +36,17 @@ public class ListaAcessoriosExtra extends javax.swing.JPanel {
         for (int i = 0; i < comps.length; i++) {
             comps[i] = extras.get(i).getName();
         }
+        listaDeExtras.setModel(new javax.swing.AbstractListModel<String>() {
+        String[] strings = comps;
+
+        public int getSize() {
+          return strings.length;
+        }
+
+        public String getElementAt(int i) {
+          return strings[i];
+        }
+      });
     }
 
 
@@ -51,7 +62,7 @@ public class ListaAcessoriosExtra extends javax.swing.JPanel {
         adicionar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listaDeExtras = new javax.swing.JList<>();
         text = new javax.swing.JLabel();
 
         adicionar.setText("Adicionar");
@@ -68,12 +79,12 @@ public class ListaAcessoriosExtra extends javax.swing.JPanel {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        listaDeExtras.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(listaDeExtras);
 
         text.setFont(new java.awt.Font("Oriya Sangam MN", 1, 14)); // NOI18N
         text.setText("O componente escolhido necessita dos seguintes componentes:");
@@ -134,8 +145,8 @@ public class ListaAcessoriosExtra extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adicionar;
     private javax.swing.JButton cancelar;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> listaDeExtras;
     private javax.swing.JLabel text;
     // End of variables declaration//GEN-END:variables
 }
