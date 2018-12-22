@@ -71,4 +71,14 @@ public class Configuracao {
     finalPrice += tempPrice;
     tempPrice = 0;
   }
+
+  /**
+   * Resets the config to nothing selected
+   */
+  public void reset() {
+    tempSelected.clear();
+    selected.clear();
+    tempPrice = 0;
+    finalPrice = 0;
+  }
 }

@@ -193,6 +193,13 @@ public class Facade {
   public void cancelaConfiguracao() {
     this.currentConfig.clearTemporary();
   }
+  
+  /**
+   * Resets the config to 0 components selected
+   */
+  public void resetConfiguracao() {
+    this.currentConfig.reset();
+  }
 
   /**
    * Given a list of components, removes them from the temporary set of components
@@ -232,6 +239,28 @@ public class Facade {
 
   public List<Componente> getSelecionados() {
     return this.currentConfig.getSelected();
+  }
+
+  /**
+   * Returns the models who have been selected
+   * @return
+   */
+  public List<Modelo> getModelosSelecionados() {
+    List<Componente> selected = this.currentConfig.getSelected();
+    List<Modelo> r = new ArrayList<>();
+    for(Componente c : selected)
+      if (c instanceof Modelo)
+        r.add((Modelo) c);
+    return r;
+  }
+  
+  public List<ComponenteAcessorio> getAcessoriosSelecionados() {
+    List<Componente> selected = this.currentConfig.getSelected();
+    List<ComponenteAcessorio> r = new ArrayList<>();
+    for(Componente c : selected)
+      if (c instanceof ComponenteAcessorio)
+        r.add((ComponenteAcessorio)c);
+    return r;
   }
 
 }

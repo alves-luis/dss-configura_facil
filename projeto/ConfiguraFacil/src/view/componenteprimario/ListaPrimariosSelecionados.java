@@ -11,6 +11,8 @@ import business.Facade;
 import java.awt.CardLayout;
 import java.util.List;
 import javax.swing.JPanel;
+import view.menus.MenuEscolha;
+import view.menus.MenuPrincipal;
 
 /**
  *
@@ -74,6 +76,8 @@ public class ListaPrimariosSelecionados extends javax.swing.JPanel {
     butaoConfirmar = new javax.swing.JButton();
     butaoSair = new javax.swing.JButton();
 
+    setPreferredSize(new java.awt.Dimension(400, 300));
+
     listaSelecionados.setModel(new javax.swing.AbstractListModel<String>() {
       String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
       public int getSize() { return strings.length; }
@@ -121,26 +125,22 @@ public class ListaPrimariosSelecionados extends javax.swing.JPanel {
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(layout.createSequentialGroup()
-            .addGap(25, 25, 25)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-              .addComponent(labelSelecionados)
-              .addComponent(scrollListaSelecionados, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-              .addComponent(labelPrecoAtual)
-              .addComponent(labelPreco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-          .addGroup(layout.createSequentialGroup()
-            .addGap(244, 244, 244)
-            .addComponent(butaoConfirmar)
-            .addGap(4, 4, 4)
-            .addComponent(butaoSair)
-            .addGap(0, 0, Short.MAX_VALUE))
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(butaoAdicionarMais)))
+        .addGap(25, 25, 25)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+          .addComponent(labelSelecionados)
+          .addComponent(scrollListaSelecionados, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+          .addComponent(butaoAdicionarMais)
+          .addComponent(labelPreco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(labelPrecoAtual))
         .addGap(24, 24, 24))
+      .addGroup(layout.createSequentialGroup()
+        .addGap(236, 236, 236)
+        .addComponent(butaoConfirmar)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(butaoSair)
+        .addGap(0, 28, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +156,7 @@ public class ListaPrimariosSelecionados extends javax.swing.JPanel {
             .addGap(34, 34, 34)
             .addComponent(butaoAdicionarMais, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addComponent(scrollListaSelecionados, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(butaoConfirmar)
           .addComponent(butaoSair))
@@ -165,11 +165,15 @@ public class ListaPrimariosSelecionados extends javax.swing.JPanel {
   }// </editor-fold>//GEN-END:initComponents
 
     private void butaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoConfirmarActionPerformed
-        // TODO add your handling code here:
+      this.parent.dispose();
+      this.facade.confirmaComponentes();
+      (new MenuEscolha(facade)).setVisible(true);
     }//GEN-LAST:event_butaoConfirmarActionPerformed
 
     private void butaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoSairActionPerformed
-        // TODO add your handling code here:
+      this.parent.dispose();
+      this.facade.resetConfiguracao();
+      (new MenuPrincipal(facade)).setVisible(true);
     }//GEN-LAST:event_butaoSairActionPerformed
 
   private void butaoAdicionarMaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoAdicionarMaisActionPerformed

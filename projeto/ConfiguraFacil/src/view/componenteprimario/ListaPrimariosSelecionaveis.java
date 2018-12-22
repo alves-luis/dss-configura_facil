@@ -11,8 +11,6 @@ import business.Facade;
 import business.Modelo;
 import java.awt.CardLayout;
 import java.util.List;
-import java.util.stream.Collectors;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import view.menus.MenuPrincipal;
 
