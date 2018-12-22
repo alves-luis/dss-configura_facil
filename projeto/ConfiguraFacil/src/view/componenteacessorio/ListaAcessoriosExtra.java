@@ -5,18 +5,39 @@
  */
 package view.componenteacessorio;
 
+import business.Componente;
+import business.ComponenteAcessorio;
+import business.Facade;
+import java.awt.CardLayout;
+import java.util.List;
+import javax.swing.JPanel;
+import view.menus.MenuEscolha;
+
 /**
  *
  * @author rafaelarodrigues
  */
 public class ListaAcessoriosExtra extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ListaAcessoriosExtra
-     */
-    public ListaAcessoriosExtra() {
+    private Facade facade;
+    private SelecionaComponenteAcessorio parent;
+    private JPanel cardPanel;
+    private int componente;
+    
+    public ListaAcessoriosExtra(Facade f, SelecionaComponenteAcessorio parent,int escolhido) {
+        this.facade=f;
+        this.parent=parent;
+        this.componente= escolhido;
+        this.cardPanel=parent.getCardPanel();
         initComponents();
+        this.parent.setTitle("Componentes Extras");
+        List<Componente> extras= facade.getExtra(this.componente);
+         String[] comps = new String[extras.size()];
+        for (int i = 0; i < comps.length; i++) {
+            comps[i] = extras.get(i).getName();
+        }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,11 +112,22 @@ public class ListaAcessoriosExtra extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarActionPerformed
-        // TODO add your handling code here:
+        facade.adicionaCompTemporario(facade.getExtra(this.componente));
+        CardLayout cl = (CardLayout) cardPanel.getLayout();
+        List<Componente> incompatible = facade.getIncompativeisFromSelected(this.componente);
+        if (incompatible.size() > 0) {
+            cardPanel.add(new ListaAcessoriosIncompativeis(facade, parent,this.componente), "INCOMPATIVEL");
+            cl.show(cardPanel, "INCOMPATIVEL");
+        } else {
+            cardPanel.add(new PrecoFinalDoAcessorio(facade, parent,this.componente), "PRECO");
+            cl.show(cardPanel, "PRECO");
+        }
     }//GEN-LAST:event_adicionarActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        // TODO add your handling code here:
+        this.facade.cancelaConfiguracao();
+        this.parent.dispose();
+        (new MenuEscolha(facade)).setVisible(true);
     }//GEN-LAST:event_cancelarActionPerformed
 
 

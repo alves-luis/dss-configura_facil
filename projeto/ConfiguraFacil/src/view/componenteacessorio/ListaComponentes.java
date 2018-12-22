@@ -5,22 +5,49 @@
  */
 package view.componenteacessorio;
 
+import business.Componente;
+import business.ComponenteAcessorio;
 import business.Facade;
+import java.awt.CardLayout;
+import java.util.List;
 import javax.swing.JPanel;
 import view.menus.MenuEscolha;
 
 /**
  *
- * @author rafaelarodrigues
+ * @author grupo
  */
 public class ListaComponentes extends javax.swing.JPanel {
 
     private SelecionaComponenteAcessorio parent;
     private Facade facade;
     private JPanel cardPanel;
-    public ListaComponentes() {
+    
+    public ListaComponentes(Facade f, SelecionaComponenteAcessorio parent) {
+        this.facade=f;
+        this.parent= parent;
+        this.cardPanel=parent.getCardPanel();
         initComponents();
+        this.parent.setTitle("Componentes Selecionáveis");
+        List<ComponenteAcessorio> acessorio= facade.getSecundariosSelecionaveis();
+        String[] comps = new String[acessorio.size()];
+        for (int i = 0; i < comps.length; i++) {
+            comps[i] = acessorio.get(i).getName();
+        }
+        listaDeComponentes.setModel(new javax.swing.AbstractListModel<String>() {
+        String[] strings = comps;
+
+        public int getSize() {
+        return strings.length;
+        }
+
+        public String getElementAt(int i) {
+        return strings[i];
+        }
+        });
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,29 +59,35 @@ public class ListaComponentes extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        ListaComponentes = new javax.swing.JList<>();
-        Sair = new javax.swing.JButton();
-        Adicionar = new javax.swing.JButton();
+        listaDeComponentes = new javax.swing.JList<>();
+        sair = new javax.swing.JButton();
+        adicionar = new javax.swing.JButton();
         text = new javax.swing.JLabel();
 
-        ListaComponentes.setModel(new javax.swing.AbstractListModel<String>() {
+        listaDeComponentes.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(ListaComponentes);
+        listaDeComponentes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaDeComponentesValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(listaDeComponentes);
 
-        Sair.setText("Sair");
-        Sair.addActionListener(new java.awt.event.ActionListener() {
+        sair.setText("Sair");
+        sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SairActionPerformed(evt);
+                sairActionPerformed(evt);
             }
         });
 
-        Adicionar.setText("Adicionar");
-        Adicionar.addActionListener(new java.awt.event.ActionListener() {
+        adicionar.setText("Adicionar");
+        adicionar.setEnabled(false);
+        adicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AdicionarActionPerformed(evt);
+                adicionarActionPerformed(evt);
             }
         });
 
@@ -76,8 +109,8 @@ public class ListaComponentes extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Adicionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Sair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(adicionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(56, 56, 56))))
         );
         layout.setVerticalGroup(
@@ -90,28 +123,49 @@ public class ListaComponentes extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(Adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
-                        .addComponent(Sair, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(51, 51, 51))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AdicionarActionPerformed
+    private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarActionPerformed
+        int escolhido= listaDeComponentes.getSelectedIndex();
+        CardLayout cl = (CardLayout) cardPanel.getLayout();
+        ComponenteAcessorio comp= facade.getSecundariosSelecionaveis().get(escolhido);
+        List<Componente> extra = facade.getExtra(comp.getCod());
+        List<Componente> incompatible = facade.getIncompativeisFromSelected(comp.getCod());
+        if (extra.size() > 0) {
+            cardPanel.add(new ListaAcessoriosExtra(facade, parent,comp.getCod()), "EXTRA");
+            cl.show(cardPanel, "EXTRA");
+      } else if (incompatible.size() > 0) {
+            cardPanel.add(new ListaAcessoriosIncompativeis(facade, parent,comp.getCod()), "INCOMPATIVEL");
+            cl.show(cardPanel, "INCOMPATIVEL");
+      } else {
+            facade.adicionaCompTemporario(comp);
+            cardPanel.add(new PrecoFinalDoAcessorio(facade, parent,comp.getCod()), "PRECO");
+            cl.show(cardPanel, "PRECO");
+      }
+    }//GEN-LAST:event_adicionarActionPerformed
 
-    private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
+    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         this.parent.dispose();
         (new MenuEscolha(facade)).setVisible(true);
-    }//GEN-LAST:event_SairActionPerformed
+    }//GEN-LAST:event_sairActionPerformed
+
+    private void listaDeComponentesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaDeComponentesValueChanged
+        if (!evt.getValueIsAdjusting()){
+            adicionar.setEnabled(true);
+        }
+    }//GEN-LAST:event_listaDeComponentesValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Adicionar;
-    private javax.swing.JList<String> ListaComponentes;
-    private javax.swing.JButton Sair;
+    private javax.swing.JButton adicionar;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> listaDeComponentes;
+    private javax.swing.JButton sair;
     private javax.swing.JLabel text;
     // End of variables declaration//GEN-END:variables
 }

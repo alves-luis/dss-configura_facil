@@ -46,6 +46,15 @@ public class Facade {
     this.compPrimarios.add(c1);
     this.compPrimarios.add(c2);
     this.compPrimarios.add(c3);
+    //ACESSORIO
+    ComponenteAcessorio b1 = new ComponenteAcessorio(22, "Componente B1", 2);
+    ComponenteAcessorio b2 = new ComponenteAcessorio(23, "Componente B2", 2);
+    b1.addIncompatibility(22);
+    b2.addIncompatibility(23);
+    this.componentes.put(22,b1);
+    this.componentes.put(23,b2);
+    this.compAcessorios.add(b1);
+    this.compAcessorios.add(b2);
   }
 
   /**

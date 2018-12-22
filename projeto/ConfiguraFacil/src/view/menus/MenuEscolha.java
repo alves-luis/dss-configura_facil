@@ -6,6 +6,7 @@
 package view.menus;
 
 import business.Facade;
+import view.componenteacessorio.SelecionaComponenteAcessorio;
 
 /**
  *
@@ -111,7 +112,8 @@ public class MenuEscolha extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void acessorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acessorioActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        (new SelecionaComponenteAcessorio(f)).setVisible(true);
     }//GEN-LAST:event_acessorioActionPerformed
 
     private void configuraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuraActionPerformed

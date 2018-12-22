@@ -5,19 +5,39 @@
  */
 package view.componenteacessorio;
 
+import business.Componente;
+import business.Facade;
+import java.awt.CardLayout;
+import java.util.List;
+import javax.swing.JPanel;
+import view.menus.MenuEscolha;
+
 /**
  *
- * @author rafaelarodrigues
+ * @author grupo
  */
 public class ListaAcessoriosIncompativeis extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ListaAcessoriosIncompativeis
-     */
-    public ListaAcessoriosIncompativeis() {
+    private Facade facade;
+    private SelecionaComponenteAcessorio parent;
+    private JPanel cardPanel;
+    private int componente;
+    
+    public ListaAcessoriosIncompativeis(Facade f, SelecionaComponenteAcessorio parent, int escolhido) {
+        this.facade=f;
+        this.parent=parent;
+        this.componente= escolhido;
+        this.cardPanel=parent.getCardPanel();
         initComponents();
+        this.parent.setTitle("Componentes Extras");
+        List<Componente> incomps= facade.getIncompativeisFromSelected(this.componente);
+         String[] comps = new String[incomps.size()];
+        for (int i = 0; i < comps.length; i++) {
+            comps[i] = incomps.get(i).getName();
+        }
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,11 +111,16 @@ public class ListaAcessoriosIncompativeis extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarActionPerformed
-        // TODO add your handling code here:
+        facade.adicionaCompTemporario(facade.getIncompativeisFromSelected(this.componente));
+        CardLayout cl = (CardLayout) cardPanel.getLayout();
+        cardPanel.add(new PrecoFinalDoAcessorio(facade, parent,this.componente), "PRECO");
+        cl.show(cardPanel, "PRECO");
     }//GEN-LAST:event_adicionarActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        // TODO add your handling code here:
+        this.facade.cancelaConfiguracao();
+        this.parent.dispose();
+        (new MenuEscolha(facade)).setVisible(true);
     }//GEN-LAST:event_cancelarActionPerformed
 
 
