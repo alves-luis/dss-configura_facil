@@ -47,8 +47,8 @@ public class Configuracao {
     listComp.stream().forEach(c -> tempPrice += c.getPrice());
   }
 
-  public void temporaryRemoveComponent(List<Componente> listComp) {
-    tempSelected.removeAll(listComp);
+  public void removeComponent(List<Componente> listComp) {
+    selected.removeAll(listComp);
     listComp.stream().forEach(c -> tempPrice -= c.getPrice());
   }
 

@@ -206,7 +206,7 @@ public class Facade {
    * @param codsComp
    */
   public void removeComponente(List<Componente> codsComp) {
-    this.currentConfig.temporaryRemoveComponent(codsComp);
+    this.currentConfig.removeComponent(codsComp);
   }
 
   /**

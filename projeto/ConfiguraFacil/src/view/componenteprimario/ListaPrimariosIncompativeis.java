@@ -5,8 +5,10 @@
  */
 package view.componenteprimario;
 
+import business.Componente;
 import business.Facade;
 import java.awt.CardLayout;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -15,20 +17,37 @@ import javax.swing.JPanel;
  */
 public class ListaPrimariosIncompativeis extends javax.swing.JPanel {
 
-    private Facade facade;
-    private SelecionaComponentePrimario parent;
-    private JPanel cardPanel;
-    
-    /**
-     * Creates new form ListaPrimariosIncompativeis
-     */
-    public ListaPrimariosIncompativeis(Facade f, SelecionaComponentePrimario c) {
-        this.facade = f;
-        this.parent = c;
-        this.cardPanel = parent.getCardPanel();
-        parent.setTitle("Componentes Incompatíveis");
-        initComponents();
+  private Facade facade;
+  private SelecionaComponentePrimario parent;
+  private JPanel cardPanel;
+  private List<Componente> incomp;
+
+  /**
+   * Creates new form ListaPrimariosIncompativeis
+   */
+  public ListaPrimariosIncompativeis(Facade f, SelecionaComponentePrimario c, List<Componente> inc) {
+    this.facade = f;
+    this.parent = c;
+    this.cardPanel = parent.getCardPanel();
+    parent.setTitle("Componentes Incompatíveis");
+    initComponents();
+    this.incomp = inc;
+    String[] incomps = new String[incomp.size()];
+    for (int i = 0; i < incomps.length; i++) {
+      incomps[i] = incomp.get(i).getName();
     }
+    jList1.setModel(new javax.swing.AbstractListModel<String>() {
+      String[] strings = incomps;
+
+      public int getSize() {
+        return strings.length;
+      }
+
+      public String getElementAt(int i) {
+        return strings[i];
+      }
+    });
+  }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,13 +127,17 @@ public class ListaPrimariosIncompativeis extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void butaoRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoRetirarActionPerformed
-        // TODO
+      facade.removeComponente(incomp);
+      cardPanel.add(new ApresentaPrecoPrimario(facade,parent),"PRECO");
+      CardLayout cl = (CardLayout) cardPanel.getLayout();
+      cl.show(cardPanel,"PRECO");
     }//GEN-LAST:event_butaoRetirarActionPerformed
 
     private void butaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoCancelarActionPerformed
-        cardPanel.add(new ListaPrimariosSelecionados(facade,parent),"SELECIONADOS");
-        CardLayout cl = (CardLayout) cardPanel.getLayout();
-        cl.show(cardPanel,"SELECIONADOS");
+      facade.cancelaConfiguracao();
+      cardPanel.add(new ListaPrimariosSelecionados(facade, parent), "SELECIONADOS");
+      CardLayout cl = (CardLayout) cardPanel.getLayout();
+      cl.show(cardPanel, "SELECIONADOS");
     }//GEN-LAST:event_butaoCancelarActionPerformed
 
 
