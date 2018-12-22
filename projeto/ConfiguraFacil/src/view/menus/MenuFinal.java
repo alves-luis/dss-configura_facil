@@ -205,6 +205,8 @@ public class MenuFinal extends javax.swing.JFrame {
   private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarActionPerformed
     this.dispose();
     // if wanted to save configs, would do that here
+    facade.cancelaConfiguracao();
+    facade.resetConfiguracao();
     (new MenuPrincipal(facade)).setVisible(true);
   }//GEN-LAST:event_adicionarActionPerformed
 

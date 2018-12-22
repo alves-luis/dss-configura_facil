@@ -1,0 +1,17 @@
+Notas sobre povoamento:
+Componente Primário:
+  Nome é do tipo: Motor, Pneu, Transmissão
+  Preço é 0
+Modelo:
+  Nome é do tipo: V4, Ultra-Vincado, Automático
+  Preço é preço do Componente
+  É o Modelo que é adicionado à configuração
+  Cada Modelo tem de ser incompatível com todos os modelos do mesmo componente primário
+  Cada Modelo pode ser incompatível apenas com outros modelos
+
+Componente Secundário:
+  Nome é completo: Para-brisas Pipi, Kit Bluetooth
+  Preço é preço do componente
+  Cada Componente pode ser incompatível com Modelos ou Componentes Secundários.
+    Apenas são apresentados os que são compatíveis com os Modelos previamente
+    selecionados.
