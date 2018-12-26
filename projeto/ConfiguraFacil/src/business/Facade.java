@@ -1,9 +1,11 @@
 package business;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Facade {
@@ -59,11 +61,35 @@ public class Facade {
 
   /**
    * This methods returns a list of components that make up a quasi-optimal config
+   * Uses constructive heuristic
    * @param val
    * @return
    */
   public List<Componente> getConfiguracaoOtima(double val) {
-    throw new UnsupportedOperationException();
+    List<Componente> result = new ArrayList<>();
+    TreeSet<ComponenteAcessorio> orderedComps = new TreeSet<>(Comparator.reverseOrder());
+    List<ComponenteAcessorio> aces = this.getSecundariosSelecionaveis();
+    
+    if (!aces.isEmpty()) 
+      orderedComps.addAll(aces);
+    else
+      return result;
+    
+    int numTries = 0;
+    double sum = 0;
+    
+    while (numTries < 3 && sum < val && orderedComps.size() > 0) {
+      ComponenteAcessorio candidate = orderedComps.first();
+      double value = candidate.getPrice();
+      if (value + sum <= val) {
+        result.add(candidate);
+        sum += value;
+      }
+      else
+        numTries++;
+      orderedComps.remove(candidate);
+    }
+    return result;
   }
 
   /**
@@ -251,7 +277,9 @@ public class Facade {
    * @param codComp
    */
   public void adicionaStock(int qt, int codComp) {
-    throw new UnsupportedOperationException();
+    Componente c = this.componentes.get(codComp);
+    if (c != null)
+      c.addStock(qt);
   }
   
   /**
