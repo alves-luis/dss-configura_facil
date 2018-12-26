@@ -6,7 +6,6 @@
 package view.componenteacessorio;
 
 import business.Componente;
-import business.ComponenteAcessorio;
 import business.Facade;
 import java.awt.CardLayout;
 import java.util.List;

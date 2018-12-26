@@ -1,4 +1,6 @@
-Notas sobre povoamento:
+﻿Notas sobre povoamento:
+Componente
+  Incompatibilidades: cada componente é incompatível com todos os componentes incompatíveis com os seus extras
 Componente Primário:
   Nome é do tipo: Motor, Pneu, Transmissão
   Preço é 0
