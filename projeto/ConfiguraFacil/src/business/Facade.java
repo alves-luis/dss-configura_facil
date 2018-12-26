@@ -81,9 +81,21 @@ public class Facade {
     while (numTries < 3 && sum < val && orderedComps.size() > 0) {
       ComponenteAcessorio candidate = orderedComps.first();
       double value = candidate.getPrice();
-      if (value + sum <= val) {
+      List<Integer> extra = candidate.getExtra();
+      List<ComponenteAcessorio> listExtra = new ArrayList<>();
+      for(Integer id : extra) {
+        ComponenteAcessorio compExtra = (ComponenteAcessorio) this.componentes.get(id);
+        value += compExtra.getPrice();
+        listExtra.add(compExtra);
+      }
+      if (value + sum < val) {
         result.add(candidate);
+        if (!listExtra.isEmpty())
+          result.addAll(listExtra);
         sum += value;
+        numTries = 0;
+        for(ComponenteAcessorio c : listExtra)
+          orderedComps.remove(c);
       }
       else
         numTries++;
