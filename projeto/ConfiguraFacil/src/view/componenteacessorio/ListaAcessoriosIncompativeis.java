@@ -122,7 +122,8 @@ public class ListaAcessoriosIncompativeis extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarActionPerformed
-        facade.adicionaCompTemporario(facade.getIncompativeisFromSelected(this.componente));
+        facade.removeComponente(facade.getIncompativeisFromSelected(this.componente));
+        facade.adicionaCompTemporario(facade.getComponente(this.componente));
         CardLayout cl = (CardLayout) cardPanel.getLayout();
         cardPanel.add(new PrecoFinalDoAcessorio(facade, parent,this.componente), "PRECO");
         cl.show(cardPanel, "PRECO");
