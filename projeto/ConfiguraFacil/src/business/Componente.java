@@ -3,7 +3,7 @@ package business;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Componente {
+public class Componente implements Comparable<Componente> {
 
   private int id;
   private String name;
@@ -59,5 +59,12 @@ public class Componente {
   
   public void addIncompatibility(int in) {
     this.incompativeis.add(in);
+  }
+
+  @Override
+  public int compareTo(Componente o) {
+    int valueThis = (int) Math.round(this.price / this.getNumDependencies());
+    int valueThat = (int) Math.round(o.getPrice() / o.getNumDependencies());
+    return valueThis - valueThat;
   }
 }
