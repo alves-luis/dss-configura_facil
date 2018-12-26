@@ -7,6 +7,7 @@ package view.componenteprimario;
 
 import business.Componente;
 import business.Facade;
+import business.Modelo;
 import java.awt.CardLayout;
 import java.util.List;
 import javax.swing.JPanel;
@@ -21,17 +22,19 @@ public class ListaPrimariosIncompativeis extends javax.swing.JPanel {
   private SelecionaComponentePrimario parent;
   private JPanel cardPanel;
   private List<Componente> incomp;
+  private Modelo mod;
 
   /**
    * Creates new form ListaPrimariosIncompativeis
    */
-  public ListaPrimariosIncompativeis(Facade f, SelecionaComponentePrimario c, List<Componente> inc) {
+  public ListaPrimariosIncompativeis(Facade f, SelecionaComponentePrimario c, List<Componente> inc, Modelo mod) {
     this.facade = f;
     this.parent = c;
     this.cardPanel = parent.getCardPanel();
     parent.setTitle("Componentes Incompatíveis");
     initComponents();
     this.incomp = inc;
+    this.mod = mod;
     String[] incomps = new String[incomp.size()];
     for (int i = 0; i < incomps.length; i++) {
       incomps[i] = incomp.get(i).getName();
@@ -128,6 +131,7 @@ public class ListaPrimariosIncompativeis extends javax.swing.JPanel {
 
     private void butaoRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoRetirarActionPerformed
       facade.removeComponente(incomp);
+      facade.adicionaCompTemporario(mod);
       cardPanel.add(new ApresentaPrecoPrimario(facade,parent),"PRECO");
       CardLayout cl = (CardLayout) cardPanel.getLayout();
       cl.show(cardPanel,"PRECO");

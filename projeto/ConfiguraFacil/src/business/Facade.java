@@ -210,11 +210,10 @@ public class Facade {
    * @return
    */
   public List<Componente> getIncompativeisFromSelected(int codComp) {
-    ArrayList<Componente> r = new ArrayList<>();
-    List<Componente> sel = this.currentConfig.getSelected();
-    for(Componente c: sel)
-      if (c.getIncompatible().contains(codComp))
-        r.add(c);
+    List<Componente> r = new ArrayList<>();
+    Set<Componente> incomp = this.currentConfig.getIncompatibleFromSelected(codComp);
+    for(Componente c : incomp)
+      r.add(c);
     return r;
   }
 

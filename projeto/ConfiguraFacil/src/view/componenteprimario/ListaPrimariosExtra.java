@@ -7,6 +7,7 @@ package view.componenteprimario;
 
 import business.Componente;
 import business.Facade;
+import business.Modelo;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,17 +26,21 @@ public class ListaPrimariosExtra extends javax.swing.JPanel {
     private SelecionaComponentePrimario parent;
     private JPanel cardPanel;
     private List<Componente> extra;
+    private List<Componente> incomp;
+    private Modelo mod;
     
   /**
    * Creates new form ListaPrimariosExtra
    */
-  public ListaPrimariosExtra(Facade f, SelecionaComponentePrimario c, List<Componente> ex) {
+  public ListaPrimariosExtra(Facade f, SelecionaComponentePrimario c, List<Componente> ex, List<Componente> incomp, Modelo mod) {
     this.facade = f;
     this.parent = c;
     this.cardPanel = parent.getCardPanel();
     this.parent.setTitle("Componentes Extra");
     initComponents();
     this.extra = ex;
+    this.incomp = incomp;
+    this.mod = mod;
     String[] comps = new String[extra.size()];
     for (int i = 0; i < comps.length; i++) {
       comps[i] = ex.get(i).getName();
@@ -133,14 +138,17 @@ public class ListaPrimariosExtra extends javax.swing.JPanel {
       for(Integer id : idComps) {
         incompatible.addAll(facade.getIncompativeisFromSelected(id));
       }
+      if (!this.incomp.isEmpty())
+        incompatible.addAll(this.incomp);
       List<Componente> incompatibleList = new ArrayList<>();
       for(Componente c : incompatible) {
         incompatibleList.add(c);
       }
       if (incompatible.size() > 0) {
-        cardPanel.add(new ListaPrimariosIncompativeis(facade,parent,incompatibleList),"INCOMPATIVEL");
+        cardPanel.add(new ListaPrimariosIncompativeis(facade,parent,incompatibleList,mod),"INCOMPATIVEL");
         cl.show(cardPanel,"INCOMPATIVEL");
       } else {
+        facade.adicionaCompTemporario(mod);
         cardPanel.add(new ApresentaPrecoPrimario(facade,parent),"PRECO");
         cl.show(cardPanel,"PRECO");
       }

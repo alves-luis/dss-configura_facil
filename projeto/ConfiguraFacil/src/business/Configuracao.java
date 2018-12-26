@@ -119,4 +119,12 @@ public class Configuracao {
     tempPrice = 0;
     finalPrice = 0;
   }
+  
+  public Set<Componente> getIncompatibleFromSelected(int cod) {
+    HashSet<Componente> r = new HashSet<>();
+    for(Componente c: this.selected)
+      if (c.getIncompatible().contains(cod))
+        r.add(c);
+    return r;
+  }
 }
