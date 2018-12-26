@@ -14,6 +14,7 @@ public class Facade {
   private Configuracao currentConfig;
   private ArrayList<ComponentePrimario> compPrimarios;
   private ArrayList<ComponenteAcessorio> compAcessorios;
+  private ArrayList<Pacote> pacotes;
 
   public Facade() {
     modelos = new HashMap<>();
@@ -57,6 +58,14 @@ public class Facade {
     this.componentes.put(23,b2);
     this.compAcessorios.add(b1);
     this.compAcessorios.add(b2);
+        //Pacotes
+    Pacote sport= new Pacote();
+    sport.packSport(this);
+    Pacote confort= new Pacote();
+    confort.packConfort(this);
+    this.pacotes.add(sport);
+    this.pacotes.add(confort);
+    
   }
 
   /**
