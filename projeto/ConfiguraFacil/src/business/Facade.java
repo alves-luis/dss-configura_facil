@@ -66,6 +66,11 @@ public class Facade {
     throw new UnsupportedOperationException();
   }
 
+  /**
+   * Returns a list of all the primary components that are not incompatible with the ones
+   * selected
+   * @return
+   */
   public List<ComponentePrimario> getPrimariosSelecionaveis() {
     Set<Integer> incompatible = currentConfig.getUnavailable();
     List<ComponentePrimario> r = new ArrayList<>();
@@ -75,6 +80,11 @@ public class Facade {
     return r;
   }
   
+  /**
+   * Returns a list of all the secondary components that are not incompatible with the ones
+   * selected
+   * @return
+   */
   public List<ComponenteAcessorio> getSecundariosSelecionaveis() {
     Set<Integer> incompatible = currentConfig.getUnavailable();
     List<ComponenteAcessorio> r = new ArrayList<>();
@@ -84,10 +94,20 @@ public class Facade {
     return r;
   }
 
+  /**
+   * Given an id of a component, returns that component
+   * @param codComp
+   * @return
+   */
   public Componente getComponente(int codComp) {
     return this.componentes.get(codComp);
   }
 
+  /**
+   * Given an id of a primary component, returns a list of all its models
+   * @param comp
+   * @return
+   */
   public List<Modelo> getModelos(int comp) {
     List<Modelo> r = new ArrayList<>();
     Componente c = this.componentes.get(comp);
@@ -139,7 +159,7 @@ public class Facade {
   }
 
   /**
-   * Given a code of a componente, returns a list of the incompatible components of
+   * Given a code of a component, returns a list of the incompatible components of
    * that component
    * @param codComp
    * @return
