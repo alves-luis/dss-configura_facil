@@ -27,10 +27,17 @@ public class Pacote {
     this.componentes = new ArrayList<>();
   }
 
+  public Pacote(int id, String nome, double desconto, ArrayList<Componente> comps) {
+    this.id = id;
+    this.nome = nome;
+    this.desconto = desconto;
+    this.componentes = comps;
+  }
+  
   public List<Componente> getComponentes() {
     return this.componentes;
   }
-
+   
   public double getPreco() {
     double total = 0;
     for (Componente c : this.componentes) {
@@ -47,6 +54,10 @@ public class Pacote {
   public int getId() {
     return this.id;
   }
+
+    public double getDesconto() {
+        return this.desconto;
+    }
 
 }
 /**

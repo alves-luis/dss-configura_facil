@@ -20,6 +20,15 @@ public class Componente implements Comparable<Componente> {
     this.incompativeis = new ArrayList<>();
     stock = 0;
   }
+  
+    public Componente(int id, String name, double price, ArrayList<Integer> extras, ArrayList<Integer> incompativeis) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.extras = new ArrayList<>();
+        this.incompativeis = new ArrayList<>();
+        stock = 0;
+    }
 
   public List<Integer> getExtra() {
     return this.extras;
@@ -87,6 +96,10 @@ public class Componente implements Comparable<Componente> {
     }
     return true;
   }
+
+    public int getStock() {
+        return this.stock;
+    }
   
   
 }
