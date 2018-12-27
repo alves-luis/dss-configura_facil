@@ -13,16 +13,17 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+
 /**
  *
  * @author diogo
  */
 
-public class ComponenteDAO implements Map<Integer,Componente> {
+public class ModeloDAO implements Map<Integer,Modelo> {
 
     public Connection conn;
 
-    public ComponenteDAO () {
+    public ModeloDAO () {
          Connect con = new Connect();
          this.conn = con.Connect();
     }
@@ -58,8 +59,8 @@ public class ComponenteDAO implements Map<Integer,Componente> {
     }
 
     @Override
-    public Set<Map.Entry<Integer,Componente>> entrySet() {
-        throw new NullPointerException("public Set<Map.Entry<String,Componente>> entrySet() not implemented!");
+    public Set<Map.Entry<Integer,Modelo>> entrySet() {
+        throw new NullPointerException("public Set<Map.Entry<String,Modelo>> entrySet() not implemented!");
     }
 
     @Override
@@ -69,11 +70,11 @@ public class ComponenteDAO implements Map<Integer,Componente> {
 
     //É preciso eu rever o put e o get porque preciso de ver as strings dentro de cada componente 
     @Override
-    public Componente get(Object key) {
+    public Modelo get(Object key) {
         try {
-            Componente al = null;
+            Modelo al = null;
             Statement stm = conn.createStatement();
-            String sql = "SELECT * FROM Componente WHERE ID='"+(String)key+"'";
+            String sql = "SELECT * FROM Componente WHERE ID='"+(String)key+"' and Tipo = 2";
             ResultSet rs = stm.executeQuery(sql);
             int ID, stock, tipo;
             double price;
@@ -108,20 +109,7 @@ public class ComponenteDAO implements Map<Integer,Componente> {
                     });
                 }
                 tipo = Integer.valueOf(rs.getString(8));
-            
-                if (tipo == 2){
-                    Modelo modelo = new Modelo(ID, name, price, ID_extras, ID_incompativeis);
-                    return modelo;
-                }    
-                if (tipo == 3){
-                    ComponenteAcessorio acessorio = new ComponenteAcessorio(ID, name, price, ID_extras, ID_incompativeis);
-                    return acessorio;
-                }
-                if (tipo == 4){
-                    ComponentePrimario primario = new ComponentePrimario(ID, name, price, ID_extras, ID_incompativeis, ID_modelos);
-                    return primario;
-                }
-                al = new Componente(ID, name, price, ID_extras, ID_incompativeis); 
+                al = new Modelo(ID, name, price, ID_extras, ID_incompativeis); 
             }
             return al;
         } catch (SQLException e) {throw new NullPointerException(e.getMessage());}     
@@ -148,9 +136,9 @@ public class ComponenteDAO implements Map<Integer,Componente> {
     }
 
     @Override
-    public Componente put(Integer key, Componente value) {
+    public Modelo put(Integer key, Modelo value) {
         try {
-            Componente al = null;
+            Modelo al = null;
             Statement stm = conn.createStatement();
             stm.executeUpdate("DELETE FROM Componente WHERE ID='"+ Integer.toString(key) +"'");
             String modelos = "null";
@@ -168,34 +156,27 @@ public class ComponenteDAO implements Map<Integer,Componente> {
                     extras.append(",");
                 }
             }   
-            
-            int tipo = 1;
-            if (value.getClass() == Modelo.class)
-                tipo = 2;
-            if (value.getClass() == ComponenteAcessorio.class)
-                tipo = 3;            
-            if (value.getClass() == ComponentePrimario.class)
-                tipo = 4;
+            int tipo = 2;
             String nome = value.getName();
             int id = value.getCod();
             int stock = value.getStock();
             double price = value.getPrice();
             String sql = "INSERT INTO Componente VALUES (" + id + "," + stock + "," + price + ",'" + nome + "','" + incompativeis.toString() + "','" + extras.toString() + "','" + modelos + "'," + tipo +");";
             int i  = stm.executeUpdate(sql);
-            return new Componente(id,nome,price);
+            return new Modelo(id,nome,price);
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}   
     }
 
     @Override
-    public void putAll(Map<? extends Integer,? extends Componente> t) {
+    public void putAll(Map<? extends Integer,? extends Modelo> t) {
         throw new NullPointerException("Not implemented!");
     }
 
     @Override
-    public Componente remove(Object key) {
+    public Modelo remove(Object key) {
         try {
-            Componente al = this.get(key);
+            Modelo al = this.get(key);
             Statement stm = conn.createStatement();
             String sql = "DELETE '"+key+"' FROM Componente";
             int i  = stm.executeUpdate(sql);
@@ -215,13 +196,13 @@ public class ComponenteDAO implements Map<Integer,Componente> {
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-
+    
     @Override
-    public Collection<Componente> values() {
+    public Collection<Modelo> values() {
         try {
-            Collection<Componente> col = new HashSet<Componente>();
+            Collection<Modelo> col = new HashSet<Modelo>();
             Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM Componente");
+            ResultSet rs = stm.executeQuery("SELECT * FROM Componente WHERE Tipo = 2");
             for (;rs.next();) {                    
                 int ID, stock, tipo;
                 double price;
@@ -232,7 +213,7 @@ public class ComponenteDAO implements Map<Integer,Componente> {
             
                 Integer s;
                 if (rs.next()){
-                    Componente al;                                    
+                    Modelo al;                                    
                     ID = Integer.valueOf(rs.getString(1));
                     stock = Integer.valueOf(rs.getString(2));
                     price = Integer.valueOf(rs.getString(3));
@@ -257,7 +238,7 @@ public class ComponenteDAO implements Map<Integer,Componente> {
                         });
                     }
                     tipo = Integer.valueOf(rs.getString(8));
-                    al = new Componente(ID, name, price, ID_extras, ID_incompativeis); 
+                    al = new Modelo(ID, name, price, ID_extras, ID_incompativeis); 
                     col.add(al);
                 }
             }
@@ -265,6 +246,7 @@ public class ComponenteDAO implements Map<Integer,Componente> {
         }
         catch (Exception e) {throw new NullPointerException(e.getMessage());}
     }    
+
 }
 
     
