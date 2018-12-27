@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class ComponentePrimario extends Componente {
   
-  private ArrayList<Modelo> modelos;
+  private ArrayList<Integer> modelos;
 
   public ComponentePrimario(int id, String name, double price) {
     super(id, name, price);
@@ -14,12 +14,12 @@ public class ComponentePrimario extends Componente {
   }
   
   public List<Integer> getModelos() {
-    return this.modelos.stream().map(m -> m.getCod()).collect(Collectors.toList());
+    return this.modelos;
   }
   
   public void addModelo(Modelo m) {
     if (m != null)
-      this.modelos.add(m);
+      this.modelos.add(m.getCod());
   }
   
   

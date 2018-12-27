@@ -23,12 +23,12 @@ public class Facade {
     compPrimarios = new ArrayList<>();
     compAcessorios = new ArrayList<>();
     pacotes= new HashMap<>();
-    ComponentePrimario c1 = new ComponentePrimario(0, "Componente 1", 2);
-    ComponentePrimario c2 = new ComponentePrimario(1, "Componente 2", 4);
-    ComponentePrimario c3 = new ComponentePrimario(2, "Componente 3", 6);
-    Modelo m1 = new Modelo(3,"Modelo a",4);
-    Modelo m2 = new Modelo(4,"Modelo b",5);
-    Modelo m3 = new Modelo(5,"Modelo c",6);
+    ComponentePrimario c1 = new ComponentePrimario(0, "Motor", 0);
+    ComponentePrimario c2 = new ComponentePrimario(1, "Pneu", 0);
+    ComponentePrimario c3 = new ComponentePrimario(2, "Transmissão", 0);
+    Modelo m1 = new Modelo(3,"V6",4);
+    Modelo m2 = new Modelo(4,"Extra-Fino",5);
+    Modelo m3 = new Modelo(5,"Automática",6);
     m1.addIncompatibility(0);
     m1.addIncompatibility(3);
     m2.addIncompatibility(4);
