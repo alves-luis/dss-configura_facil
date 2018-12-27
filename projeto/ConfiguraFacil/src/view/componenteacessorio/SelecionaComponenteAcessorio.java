@@ -19,7 +19,6 @@ public class SelecionaComponenteAcessorio extends javax.swing.JFrame {
         
     private void centerFrame() {
         this.setResizable(false);
-        this.setLocationRelativeTo(null);
     }
     
     public SelecionaComponenteAcessorio(Facade f) {

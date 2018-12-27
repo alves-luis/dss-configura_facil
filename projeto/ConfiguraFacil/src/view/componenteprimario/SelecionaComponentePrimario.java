@@ -20,7 +20,6 @@ public class SelecionaComponentePrimario extends javax.swing.JFrame {
 
     private void centerFrame() {
         this.setResizable(false);
-        this.setLocationRelativeTo(null);
     }
     /**
      * Creates new form SelecionaComponentePrimario

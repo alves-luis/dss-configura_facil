@@ -14,33 +14,40 @@ import java.util.List;
  * @author rafaelarodrigues
  */
 public class Pacote {
-    
-    private Integer id;
-    private String nome;
-    private double desconto;
-    private ArrayList<Componente> componentes;
-    
-    public Pacote(Integer id,String nome,Double desconto){
-        this.id=id;
-        this.nome=nome;
-        this.desconto=desconto;
-        this.componentes= new ArrayList<>();
+
+  private int id;
+  private String nome;
+  private double desconto;
+  private ArrayList<Componente> componentes;
+
+  public Pacote(int id, String nome, double desconto) {
+    this.id = id;
+    this.nome = nome;
+    this.desconto = desconto;
+    this.componentes = new ArrayList<>();
+  }
+
+  public List<Componente> getComponentes() {
+    return this.componentes;
+  }
+
+  public double getPreco() {
+    double total = 0;
+    for (Componente c : this.componentes) {
+      total += c.getPrice();
     }
-            
-    public List<Componente> getComponentes(){
-        return this.componentes;
-    }
-    
-    public double getPreco(){
-        double total=0;
-        for (Componente c: this.componentes){
-            total+=c.getPrice();
-        }
-        total= total-total*this.desconto;
-        return total; 
-    }
-    
-    
+    total = total - total * this.desconto;
+    return total;
+  }
+  
+  public String getName() {
+    return this.nome;
+  }
+  
+  public int getId() {
+    return this.id;
+  }
+
 }
 /**
   public void packSport(Facade f) {

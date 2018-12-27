@@ -233,11 +233,10 @@ public class Facade {
    * @return
    */
   public List<Componente> getIncompativeisFromSelected(int codComp) {
-    ArrayList<Componente> r = new ArrayList<>();
-    List<Componente> sel = this.currentConfig.getSelected();
-    for(Componente c: sel)
-      if (c.getIncompatible().contains(codComp))
-        r.add(c);
+    List<Componente> r = new ArrayList<>();
+    Set<Componente> incomp = this.currentConfig.getIncompatibleFromSelected(codComp);
+    for(Componente c : incomp)
+      r.add(c);
     return r;
   }
 
@@ -246,7 +245,10 @@ public class Facade {
    * @return
    */
   public List<Componente> getComponentes() {
-    return this.componentes.values().stream().collect(Collectors.toList());
+    List<Componente> r = new ArrayList<>();
+    r.addAll(this.compAcessorios);
+    r.addAll(this.modelos.values());
+    return r;
   }
 
   /**
@@ -358,7 +360,7 @@ public class Facade {
    */
   
   public List<Pacote> getPacotes(){
-      return (List<Pacote>) this.pacotes.values();
+      return this.pacotes.values().stream().collect(Collectors.toList());
   }
   
   /**
@@ -370,24 +372,30 @@ public class Facade {
   }
   
   /**
-   * Given a package, returns a list of all the components that are incompatible.
+   * Given a package, returns a list of all the components that are
+   * incompatible, from the ones selected
+   *
    * @param pack
    */
-  public List<Componente> getIncompativeisFromSelected(Pacote pack){
-      List<Componente> comps = pack.getComponentes();
-      List<Componente> r = new ArrayList<>();
-      for (Componente init: comps){
-          for (int j: init.getIncompatible()){
-              Componente comp= this.componentes.get(j);
-              if (comp != null && !(r.contains(comp)))
-                  r.add(comp);
-          }
-      }
+  public List<Componente> getIncompativeisFromSelected(Pacote pack) {
+    List <Componente> comps = pack.getComponentes();
+    List<Componente> r = new ArrayList<>();
+    for (Componente init : comps) {
+      List<Componente> incompativeis = getIncompativeisFromSelected(init.getCod());
+      for(Componente c : incompativeis)
+        if (!r.contains(c))
+          r.add(c);
+    }
     return r;
   }
   
 
-  public double getPrecoPacote(Pacote pack){
-      return pack.getPreco();
+  public double getPrecoPacote(int idPack){
+      double r = 0;
+      Pacote p = this.pacotes.get(idPack);
+      if (p != null)
+        return p.getPreco();
+      else
+        return r;
   }
 }

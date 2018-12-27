@@ -19,7 +19,6 @@ public class SelecionaConfiguracaoOtima extends javax.swing.JFrame {
     
     private void centerFrame() {
         this.setResizable(false);
-        this.setLocationRelativeTo(null);
     }
     
     /**
@@ -28,6 +27,7 @@ public class SelecionaConfiguracaoOtima extends javax.swing.JFrame {
     public SelecionaConfiguracaoOtima(Facade f) {
         facade = f;
         initComponents();
+        centerFrame();
         cardPanel.add(new InsereValorObjetivo(f,this),"INSERE");
         CardLayout cl = (CardLayout) cardPanel.getLayout();
         cl.show(cardPanel,"INSERE");

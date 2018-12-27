@@ -5,6 +5,7 @@ package view.menus;
 
 import business.Facade;
 import view.componenteprimario.SelecionaComponentePrimario;
+import view.registaStock.SelecionaStock;
 
 /**
  *
@@ -93,7 +94,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void funcionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funcionarioActionPerformed
-        // TODO add your handling code here:
+      this.dispose();
+      (new SelecionaStock(facade)).setVisible(true);
     }//GEN-LAST:event_funcionarioActionPerformed
 
     private void configuraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuraActionPerformed

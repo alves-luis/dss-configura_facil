@@ -7,6 +7,8 @@ package view.menus;
 
 import business.Facade;
 import view.componenteacessorio.SelecionaComponenteAcessorio;
+import view.configotima.SelecionaConfiguracaoOtima;
+import view.pacote.SelecionaPacote;
 
 /**
  *
@@ -117,11 +119,13 @@ public class MenuEscolha extends javax.swing.JFrame {
     }//GEN-LAST:event_acessorioActionPerformed
 
     private void configuraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuraActionPerformed
-        // TODO add your handling code here:
+      this.dispose();
+      (new SelecionaConfiguracaoOtima(f)).setVisible(true);
     }//GEN-LAST:event_configuraActionPerformed
 
     private void pacoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacoteActionPerformed
-        // TODO add your handling code here:
+      this.dispose();
+      (new SelecionaPacote(f)).setVisible(true);
     }//GEN-LAST:event_pacoteActionPerformed
 
   private void concluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_concluirActionPerformed
