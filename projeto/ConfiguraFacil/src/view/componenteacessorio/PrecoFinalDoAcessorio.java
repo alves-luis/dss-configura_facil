@@ -8,7 +8,6 @@ package view.componenteacessorio;
 import business.Facade;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
-import view.componenteprimario.ListaPrimariosSelecionados;
 
 /**
  *

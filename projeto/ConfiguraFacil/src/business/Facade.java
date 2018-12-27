@@ -396,4 +396,12 @@ public class Facade {
       else
         return r;
   }
+  
+  public List<Componente> getComponentes(int idPack) {
+    Pacote p = this.pacotes.get(idPack);
+    if (p != null)
+      return p.getComponentes();
+    else
+      return new ArrayList<>();
+  }
 }

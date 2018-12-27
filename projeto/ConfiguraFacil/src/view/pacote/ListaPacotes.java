@@ -5,26 +5,13 @@
  */
 package view.pacote;
 
-/**
- *
- * @author andreg18
- */
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import business.Componente;
-import business.ComponentePrimario;
 import business.Facade;
-import business.Modelo;
 import business.Pacote;
 import java.awt.CardLayout;
 import java.util.List;
 import javax.swing.JPanel;
 import view.menus.MenuEscolha;
-import view.menus.MenuPrincipal;
 
 /**
  *
@@ -200,8 +187,9 @@ public class ListaPacotes extends javax.swing.JPanel {
       int row = listaPacotes.getSelectedIndex();
       if (row == -1)
         return;
-      int idPack = facade.getPacotes().get(row).getId();
-      List<Componente> selecionaveis = facade.getPacote(idPack).getComponentes();
+      Pacote p = facade.getPacotes().get(row);
+      int idPack = p.getId();
+      List<Componente> selecionaveis = facade.getComponentes(idPack);
 
       String[] comps = new String[selecionaveis.size()];
       for (int i = 0; i < comps.length; i++) {

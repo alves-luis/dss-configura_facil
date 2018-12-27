@@ -80,7 +80,7 @@ public class InsereValorObjetivo extends javax.swing.JPanel {
           .addComponent(valorField))
         .addGap(147, 147, 147))
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addContainerGap()
         .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(20, 20, 20))
       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
