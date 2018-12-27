@@ -113,15 +113,17 @@ public class ComponenteDAO implements Map<Integer,Componente> {
                     Modelo modelo = new Modelo(ID, name, price, ID_extras, ID_incompativeis);
                     return modelo;
                 }    
-                if (tipo == 3){
+                else if (tipo == 3){
                     ComponenteAcessorio acessorio = new ComponenteAcessorio(ID, name, price, ID_extras, ID_incompativeis);
                     return acessorio;
                 }
-                if (tipo == 4){
+                else if (tipo == 4){
                     ComponentePrimario primario = new ComponentePrimario(ID, name, price, ID_extras, ID_incompativeis, ID_modelos);
                     return primario;
                 }
-                al = new Componente(ID, name, price, ID_extras, ID_incompativeis); 
+                else{
+                    al = new Componente(ID, name, price, ID_extras, ID_incompativeis);                    
+                } 
             }
             return al;
         } catch (SQLException e) {throw new NullPointerException(e.getMessage());}     
@@ -257,8 +259,22 @@ public class ComponenteDAO implements Map<Integer,Componente> {
                         });
                     }
                     tipo = Integer.valueOf(rs.getString(8));
-                    al = new Componente(ID, name, price, ID_extras, ID_incompativeis); 
-                    col.add(al);
+                    if (tipo == 2){
+                        Modelo modelo = new Modelo(ID, name, price, ID_extras, ID_incompativeis);
+                        col.add(modelo);
+                    }    
+                    else if (tipo == 3){
+                        ComponenteAcessorio acessorio = new ComponenteAcessorio(ID, name, price, ID_extras, ID_incompativeis);
+                        col.add(acessorio);
+                    }
+                    else if (tipo == 4){
+                        ComponentePrimario primario = new ComponentePrimario(ID, name, price, ID_extras, ID_incompativeis, ID_modelos);
+                        col.add(primario);
+                    }
+                    else{
+                        al = new Componente(ID, name, price, ID_extras, ID_incompativeis);
+                        col.add(al);
+                    }                    
                 }
             }
             return col;

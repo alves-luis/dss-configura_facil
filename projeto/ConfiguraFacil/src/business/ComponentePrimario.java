@@ -12,6 +12,11 @@ public class ComponentePrimario extends Componente {
     super(id, name, price);
     modelos = new ArrayList<>();
   }
+
+    public ComponentePrimario(int ID, String name, double price, ArrayList<Integer> ID_extras, ArrayList<Integer> ID_incompativeis, ArrayList<Integer> ID_modelos) {
+        super(ID, name, price);
+        this.modelos = ID_modelos;
+    }
   
   public List<Integer> getModelos() {
     return this.modelos;
