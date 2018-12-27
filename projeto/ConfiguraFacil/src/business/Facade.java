@@ -14,7 +14,7 @@ public class Facade {
   private Configuracao currentConfig;
   private ArrayList<ComponentePrimario> compPrimarios;
   private ArrayList<ComponenteAcessorio> compAcessorios;
-  private ArrayList<Pacote> pacotes;
+  private HashMap<Integer,Pacote> pacotes;
 
   public Facade() {
     modelos = new HashMap<>();
@@ -22,6 +22,7 @@ public class Facade {
     currentConfig = new Configuracao();
     compPrimarios = new ArrayList<>();
     compAcessorios = new ArrayList<>();
+    pacotes= new HashMap<>();
     ComponentePrimario c1 = new ComponentePrimario(0, "Componente 1", 2);
     ComponentePrimario c2 = new ComponentePrimario(1, "Componente 2", 4);
     ComponentePrimario c3 = new ComponentePrimario(2, "Componente 3", 6);
@@ -59,13 +60,14 @@ public class Facade {
     this.compAcessorios.add(b1);
     this.compAcessorios.add(b2);
         //Pacotes
+    /*
     Pacote sport= new Pacote();
     sport.packSport(this);
     Pacote confort= new Pacote();
     confort.packConfort(this);
     this.pacotes.add(sport);
     this.pacotes.add(confort);
-    
+    */
   }
 
   /**
@@ -231,10 +233,11 @@ public class Facade {
    * @return
    */
   public List<Componente> getIncompativeisFromSelected(int codComp) {
-    List<Componente> r = new ArrayList<>();
-    Set<Componente> incomp = this.currentConfig.getIncompatibleFromSelected(codComp);
-    for(Componente c : incomp)
-      r.add(c);
+    ArrayList<Componente> r = new ArrayList<>();
+    List<Componente> sel = this.currentConfig.getSelected();
+    for(Componente c: sel)
+      if (c.getIncompatible().contains(codComp))
+        r.add(c);
     return r;
   }
 
@@ -261,6 +264,16 @@ public class Facade {
   public void adicionaCompTemporario(List<Componente> comps) {
     this.currentConfig.temporaryAddComponent(comps);
   }
+  
+  /**
+   * Given a package with components, adds them to the temporary set of components
+   * @param pac
+   */
+  public void adicionaCompTemporario(Pacote pac) {
+    List<Componente> all=pac.getComponentes();
+    this.currentConfig.temporaryAddComponent(all);
+  }  
+  
 
   /**
    * Resets the temporary status of the config
@@ -340,4 +353,41 @@ public class Facade {
     return r;
   }
 
+  /**
+   * Returns all the available packages.
+   */
+  
+  public List<Pacote> getPacotes(){
+      return (List<Pacote>) this.pacotes.values();
+  }
+  
+  /**
+   * Given the identifier of a package, returns the package.
+   * @param pack
+   */
+  public Pacote getPacote(int pack){
+      return this.pacotes.get(pack);
+  }
+  
+  /**
+   * Given a package, returns a list of all the components that are incompatible.
+   * @param pack
+   */
+  public List<Componente> getIncompativeisFromSelected(Pacote pack){
+      List<Componente> comps = pack.getComponentes();
+      List<Componente> r = new ArrayList<>();
+      for (Componente init: comps){
+          for (int j: init.getIncompatible()){
+              Componente comp= this.componentes.get(j);
+              if (comp != null && !(r.contains(comp)))
+                  r.add(comp);
+          }
+      }
+    return r;
+  }
+  
+
+  public double getPrecoPacote(Pacote pack){
+      return pack.getPreco();
+  }
 }

@@ -1,24 +1,48 @@
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package business;
 
-import business.Componente;
-import business.Facade;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+/**
+ *
+ * @author rafaelarodrigues
+ */
 public class Pacote {
-  
-  private ArrayList<Componente> pack;
-  private double preco;
-  private String name;
-  
-  public Pacote() {
-    preco=0;
-    pack = new ArrayList<>();
-    name="";
-  }
-  
-
+    
+    private Integer id;
+    private String nome;
+    private double desconto;
+    private ArrayList<Componente> componentes;
+    
+    public Pacote(Integer id,String nome,Double desconto){
+        this.id=id;
+        this.nome=nome;
+        this.desconto=desconto;
+        this.componentes= new ArrayList<>();
+    }
+            
+    public List<Componente> getComponentes(){
+        return this.componentes;
+    }
+    
+    public double getPreco(){
+        double total=0;
+        for (Componente c: this.componentes){
+            total+=c.getPrice();
+        }
+        total= total-total*this.desconto;
+        return total; 
+    }
+    
+    
+}
+/**
   public void packSport(Facade f) {
       this.pack.add(f.getComponente(1));
       this.pack.add(f.getComponente(2));
@@ -39,8 +63,5 @@ public class Pacote {
       this.name="confort";
   }
     
-  public double getPreco() {
-    return this.preco*0.8;
-  }
-  
-}
+ */
+
