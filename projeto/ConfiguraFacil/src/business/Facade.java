@@ -135,12 +135,12 @@ public class Facade {
     List<ComponenteAcessorio> aces = this.getSecundariosSelecionaveis();
     
     for(ComponenteAcessorio c : aces)
-      orderedComps.add(c);
+      if (c.getPrice() <= val)
+        orderedComps.add(c);
     
-    int numTries = 0;
     double sum = 0;
     
-    while (numTries < 3 && sum < val && orderedComps.size() > 0) {
+    while (sum < val && orderedComps.size() > 0) {
       ComponenteAcessorio candidate = orderedComps.first();
       double value = candidate.getPrice();
       List<Integer> extra = candidate.getExtra();
@@ -155,12 +155,9 @@ public class Facade {
         if (!listExtra.isEmpty())
           result.addAll(listExtra);
         sum += value;
-        numTries = 0;
         for(ComponenteAcessorio c : listExtra)
           orderedComps.remove(c);
       }
-      else
-        numTries++;
       orderedComps.remove(candidate);
     }
     return result;
