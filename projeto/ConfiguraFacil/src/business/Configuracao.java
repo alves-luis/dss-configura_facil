@@ -26,6 +26,7 @@ public class Configuracao {
   public Set<Integer> getUnavailable() {
     HashSet<Integer> r = new HashSet<>();
     for(Componente c : selected) {
+      r.add(c.getCod());
       List<Integer> incomp = c.getIncompatible();
       for(Integer i : incomp)
         r.add(i);
