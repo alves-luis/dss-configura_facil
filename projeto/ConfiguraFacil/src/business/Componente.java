@@ -69,6 +69,10 @@ public class Componente implements Comparable<Componente> {
   public void addIncompatibility(int in) {
     this.incompativeis.add(in);
   }
+  
+  public void addExtra(int ex) {
+    this.extras.add(ex);
+  }
 
   @Override
   public int compareTo(Componente o) {

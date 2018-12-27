@@ -168,7 +168,7 @@ public class ListaPrimariosSelecionaveis extends javax.swing.JPanel {
 
     private void butaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoSairActionPerformed
         this.parent.dispose();
-        this.facade.cancelaConfiguracao();
+        this.facade.resetConfiguracao();
         (new MenuPrincipal(facade)).setVisible(true);
     }//GEN-LAST:event_butaoSairActionPerformed
 
