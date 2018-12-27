@@ -76,6 +76,8 @@ public class ListaPrimariosSelecionados extends javax.swing.JPanel {
     butaoConfirmar = new javax.swing.JButton();
     butaoSair = new javax.swing.JButton();
 
+    setMaximumSize(new java.awt.Dimension(400, 300));
+    setMinimumSize(new java.awt.Dimension(400, 300));
     setPreferredSize(new java.awt.Dimension(400, 300));
 
     listaSelecionados.setModel(new javax.swing.AbstractListModel<String>() {

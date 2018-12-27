@@ -64,7 +64,6 @@ public class ListaPacotes extends javax.swing.JPanel {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    jPanel1 = new javax.swing.JPanel();
     scrollListaComponentes = new javax.swing.JScrollPane();
     listaComponentes = new javax.swing.JList<>();
     butaoSair = new javax.swing.JButton();
@@ -119,53 +118,6 @@ public class ListaPacotes extends javax.swing.JPanel {
     });
     scrollListaPacotes.setViewportView(listaPacotes);
 
-    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-    jPanel1.setLayout(jPanel1Layout);
-    jPanel1Layout.setHorizontalGroup(
-      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel1Layout.createSequentialGroup()
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(jPanel1Layout.createSequentialGroup()
-            .addGap(34, 34, 34)
-            .addComponent(scrollListaPacotes, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addGroup(jPanel1Layout.createSequentialGroup()
-            .addGap(77, 77, 77)
-            .addComponent(labelPacotes)))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-              .addComponent(scrollListaComponentes, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(butaoSelecionar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(butaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGap(37, 37, 37))
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-            .addComponent(labelComponentes)
-            .addGap(67, 67, 67))))
-    );
-    jPanel1Layout.setVerticalGroup(
-      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel1Layout.createSequentialGroup()
-        .addGap(30, 30, 30)
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(labelPacotes)
-          .addComponent(labelComponentes))
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(jPanel1Layout.createSequentialGroup()
-            .addGap(18, 18, 18)
-            .addComponent(scrollListaComponentes, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
-          .addGroup(jPanel1Layout.createSequentialGroup()
-            .addGap(18, 18, 18)
-            .addComponent(scrollListaPacotes)))
-        .addGap(18, 18, 18)
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(butaoSair)
-          .addComponent(butaoSelecionar))
-        .addContainerGap())
-    );
-
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
@@ -173,18 +125,45 @@ public class ListaPacotes extends javax.swing.JPanel {
       .addGap(0, 400, Short.MAX_VALUE)
       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-          .addGap(0, 0, Short.MAX_VALUE)
-          .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addGap(0, 0, Short.MAX_VALUE)))
+          .addGap(35, 35, 35)
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scrollListaPacotes, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+              .addGap(43, 43, 43)
+              .addComponent(labelPacotes)))
+          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scrollListaComponentes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+              .addComponent(butaoSelecionar)
+              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+              .addComponent(butaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+              .addComponent(labelComponentes)
+              .addGap(30, 30, 30)))
+          .addGap(36, 36, 36)))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGap(0, 300, Short.MAX_VALUE)
       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-          .addGap(0, 0, Short.MAX_VALUE)
-          .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addGap(0, 0, Short.MAX_VALUE)))
+          .addGap(20, 20, 20)
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelPacotes, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(labelComponentes, javax.swing.GroupLayout.Alignment.TRAILING))
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+              .addGap(18, 18, 18)
+              .addComponent(scrollListaComponentes, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+              .addGap(18, 18, 18)
+              .addComponent(scrollListaPacotes)))
+          .addGap(18, 18, 18)
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addComponent(butaoSair)
+            .addComponent(butaoSelecionar))
+          .addGap(21, 21, 21)))
     );
   }// </editor-fold>//GEN-END:initComponents
 
@@ -247,7 +226,6 @@ public class ListaPacotes extends javax.swing.JPanel {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton butaoSair;
   private javax.swing.JButton butaoSelecionar;
-  private javax.swing.JPanel jPanel1;
   private javax.swing.JLabel labelComponentes;
   private javax.swing.JLabel labelPacotes;
   private javax.swing.JList<String> listaComponentes;

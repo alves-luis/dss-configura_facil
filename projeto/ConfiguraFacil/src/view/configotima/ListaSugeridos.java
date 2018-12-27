@@ -70,6 +70,9 @@ public class ListaSugeridos extends javax.swing.JPanel {
     jScrollPane1 = new javax.swing.JScrollPane();
     listSugeridos = new javax.swing.JList<>();
 
+    setMaximumSize(new java.awt.Dimension(400, 300));
+    setMinimumSize(new java.awt.Dimension(400, 300));
+
     novoValorButton.setText("Inserir Novo valor");
     novoValorButton.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {

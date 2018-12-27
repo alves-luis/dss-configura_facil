@@ -46,6 +46,9 @@ public class InsereValorObjetivo extends javax.swing.JPanel {
     cancelarButton = new javax.swing.JButton();
     calcularButton = new javax.swing.JButton();
 
+    setMaximumSize(new java.awt.Dimension(400, 300));
+    setMinimumSize(new java.awt.Dimension(400, 300));
+
     labelValor.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
     labelValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     labelValor.setText("Valor a otimizar");

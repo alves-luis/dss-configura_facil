@@ -71,6 +71,10 @@ public class ListaPrimariosExtra extends javax.swing.JPanel {
     butaoAdicionar = new javax.swing.JButton();
     butaoCancelar = new javax.swing.JButton();
 
+    setMaximumSize(new java.awt.Dimension(400, 300));
+    setMinimumSize(new java.awt.Dimension(400, 300));
+    setPreferredSize(new java.awt.Dimension(400, 300));
+
     labelComponentesExtra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     labelComponentesExtra.setText("Modelos Extra");
 

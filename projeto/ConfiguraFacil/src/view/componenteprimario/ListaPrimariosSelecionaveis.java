@@ -69,6 +69,10 @@ public class ListaPrimariosSelecionaveis extends javax.swing.JPanel {
     scrollListaComponentes = new javax.swing.JScrollPane();
     listaComponentes = new javax.swing.JList<>();
 
+    setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+    setMaximumSize(new java.awt.Dimension(400, 300));
+    setMinimumSize(new java.awt.Dimension(400, 300));
+
     listaModelos.setModel(new javax.swing.AbstractListModel<String>() {
       String[] strings = {};
       public int getSize() { return strings.length; }
