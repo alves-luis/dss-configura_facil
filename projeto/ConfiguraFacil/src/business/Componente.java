@@ -65,6 +65,28 @@ public class Componente implements Comparable<Componente> {
   public int compareTo(Componente o) {
     int valueThis = (int) Math.round(this.price / this.getNumDependencies());
     int valueThat = (int) Math.round(o.getPrice() / o.getNumDependencies());
+    if (valueThis == valueThat)
+      return this.id - o.getCod();
     return valueThis - valueThat;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final Componente other = (Componente) obj;
+    if (this.id != other.getCod()) {
+      return false;
+    }
+    return true;
+  }
+  
+  
 }

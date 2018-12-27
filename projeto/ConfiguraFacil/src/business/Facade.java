@@ -81,10 +81,8 @@ public class Facade {
     TreeSet<ComponenteAcessorio> orderedComps = new TreeSet<>(Comparator.reverseOrder());
     List<ComponenteAcessorio> aces = this.getSecundariosSelecionaveis();
     
-    if (!aces.isEmpty()) 
-      orderedComps.addAll(aces);
-    else
-      return result;
+    for(ComponenteAcessorio c : aces)
+      orderedComps.add(c);
     
     int numTries = 0;
     double sum = 0;
@@ -99,7 +97,7 @@ public class Facade {
         value += compExtra.getPrice();
         listExtra.add(compExtra);
       }
-      if (value + sum < val) {
+      if (value + sum <= val) {
         result.add(candidate);
         if (!listExtra.isEmpty())
           result.addAll(listExtra);
