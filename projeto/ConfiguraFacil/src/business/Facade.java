@@ -1,5 +1,6 @@
 package business;
 
+import data.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -10,13 +11,33 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Facade {
-  private HashMap<Integer,Modelo> modelos;
-  private HashMap<Integer,Componente> componentes;
+  //private HashMap<Integer,Pacote> pacotes;
+  //private HashMap<Integer,Modelo> modelos;    
+  //private HashMap<Integer,Componente> componentes;
   private Configuracao currentConfig;
   private ArrayList<ComponentePrimario> compPrimarios;
-  private ArrayList<ComponenteAcessorio> compAcessorios;
-  private HashMap<Integer,Pacote> pacotes;
-
+  private ArrayList<ComponenteAcessorio> compAcessorios;      
+    private ModeloDAO modelos;
+    private ComponenteDAO componentes;  
+    private PacoteDAO pacotes;
+          
+    public Facade(){
+        this.modelos = new ModeloDAO();
+        this.componentes = new ComponenteDAO();
+        this.pacotes = new PacoteDAO();
+        this.currentConfig = new Configuracao();
+        this.compPrimarios = new ArrayList<>();
+        this.compAcessorios = new ArrayList<>();
+        
+        ArrayList<Componente> comp = new ArrayList<>(this.componentes.values());
+        for (int i = 0; i < comp.size(); i++) {
+            if(comp.get(i).getClass() == ComponenteAcessorio.class)
+                this.compAcessorios.add((ComponenteAcessorio) comp.get(i));
+            if(comp.get(i).getClass() == ComponentePrimario.class)
+                this.compPrimarios.add((ComponentePrimario) comp.get(i));
+	}      
+    } 
+/*    
   public Facade() {
     modelos = new HashMap<>();
     componentes = new HashMap<>();
@@ -120,7 +141,7 @@ public class Facade {
     Pacote sport = new Pacote(0, "Sport", 0.2,parts);
     this.pacotes.put(0,sport);
   }
-
+*/
   /**
    * This methods returns a list of components that make up a quasi-optimal config
    * Uses constructive heuristic

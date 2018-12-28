@@ -73,7 +73,7 @@ public class ComponenteDAO implements Map<Integer,Componente> {
         try {
             Componente al = null;
             Statement stm = conn.createStatement();
-            String sql = "SELECT * FROM Componente WHERE ID='"+(String)key+"'";
+            String sql = "SELECT * FROM Componente WHERE ID='"+ key +"'";
             ResultSet rs = stm.executeQuery(sql);
             int ID, stock, tipo;
             double price;
@@ -82,26 +82,27 @@ public class ComponenteDAO implements Map<Integer,Componente> {
             ArrayList<Integer> ID_extras = new ArrayList<>();
             ArrayList<Integer> ID_modelos = new ArrayList<>();
             
-            Integer s;
             if (rs.next()){
                 ID = Integer.valueOf(rs.getString(1));
                 stock = Integer.valueOf(rs.getString(2));
-                price = Integer.valueOf(rs.getString(3));
+                price = Double.valueOf(rs.getString(3));
                 name = rs.getString(4);
                 incompativeis = rs.getString(5);
-                if (incompativeis == null){
+                if (incompativeis != null){
                     ArrayList<String> list = new ArrayList<String>(Arrays.asList(incompativeis.split(",")));
-                    for(String current : list)
+                    list.forEach((current) -> {
                         ID_incompativeis.add(Integer.valueOf(current));
+                    });
                 }
                 extras = rs.getString(6);
-                if (extras == null){
+                if (extras != null){
                     ArrayList<String> list = new ArrayList<String>(Arrays.asList(extras.split(",")));
-                    for(String current : list)
+                    list.forEach((current) -> {
                         ID_extras.add(Integer.valueOf(current));
+                    });
                 }                
                 modelos = rs.getString(7);
-                if (modelos == null){
+                if (modelos != null){
                     ArrayList<String> list = new ArrayList<String>(Arrays.asList(modelos.split(",")));
                     list.forEach((current) -> {
                         ID_modelos.add(Integer.valueOf(current));
@@ -109,21 +110,20 @@ public class ComponenteDAO implements Map<Integer,Componente> {
                 }
                 tipo = Integer.valueOf(rs.getString(8));
             
-                if (tipo == 2){
-                    Modelo modelo = new Modelo(ID, name, price, ID_extras, ID_incompativeis);
-                    return modelo;
-                }    
-                else if (tipo == 3){
-                    ComponenteAcessorio acessorio = new ComponenteAcessorio(ID, name, price, ID_extras, ID_incompativeis);
-                    return acessorio;
+                switch (tipo) {
+                    case 2:
+                        Modelo modelo = new Modelo(ID, name, price, ID_extras, ID_incompativeis);
+                        return modelo;
+                    case 3:
+                        ComponenteAcessorio acessorio = new ComponenteAcessorio(ID, name, price, ID_extras, ID_incompativeis);
+                        return acessorio;
+                    case 4:
+                        ComponentePrimario primario = new ComponentePrimario(ID, name, price, ID_extras, ID_incompativeis, ID_modelos);
+                        return primario;
+                    default:
+                        al = new Componente(ID, name, price, ID_extras, ID_incompativeis);
+                        break;
                 }
-                else if (tipo == 4){
-                    ComponentePrimario primario = new ComponentePrimario(ID, name, price, ID_extras, ID_incompativeis, ID_modelos);
-                    return primario;
-                }
-                else{
-                    al = new Componente(ID, name, price, ID_extras, ID_incompativeis);                    
-                } 
             }
             return al;
         } catch (SQLException e) {throw new NullPointerException(e.getMessage());}     
@@ -152,8 +152,8 @@ public class ComponenteDAO implements Map<Integer,Componente> {
     @Override
     public Componente put(Integer key, Componente value) {
         try {
-            Componente al = null;
-            Statement stm = conn.createStatement();
+            Componente al = null;                         
+            Statement stm = this.conn.createStatement();
             stm.executeUpdate("DELETE FROM Componente WHERE ID='"+ Integer.toString(key) +"'");
             String modelos = "null";
             StringBuilder extras = new StringBuilder();
@@ -174,9 +174,9 @@ public class ComponenteDAO implements Map<Integer,Componente> {
             int tipo = 1;
             if (value.getClass() == Modelo.class)
                 tipo = 2;
-            if (value.getClass() == ComponenteAcessorio.class)
+            else if (value.getClass() == ComponenteAcessorio.class)
                 tipo = 3;            
-            if (value.getClass() == ComponentePrimario.class)
+            else if (value.getClass() == ComponentePrimario.class)
                 tipo = 4;
             String nome = value.getName();
             int id = value.getCod();
@@ -220,8 +220,8 @@ public class ComponenteDAO implements Map<Integer,Componente> {
 
     @Override
     public Collection<Componente> values() {
-        try {
-            Collection<Componente> col = new HashSet<Componente>();
+        try {            
+            Collection<Componente> col = new HashSet<>();
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery("SELECT * FROM Componente");
             for (;rs.next();) {                    
@@ -230,56 +230,58 @@ public class ComponenteDAO implements Map<Integer,Componente> {
                 String name, incompativeis, extras, modelos;
                 ArrayList<Integer> ID_incompativeis = new ArrayList<>();
                 ArrayList<Integer> ID_extras = new ArrayList<>();
-                ArrayList<Integer> ID_modelos = new ArrayList<>();
+                ArrayList<Integer> ID_modelos = new ArrayList<>();          
             
                 Integer s;
-                if (rs.next()){
-                    Componente al;                                    
-                    ID = Integer.valueOf(rs.getString(1));
-                    stock = Integer.valueOf(rs.getString(2));
-                    price = Integer.valueOf(rs.getString(3));
-                    name = rs.getString(4);
-                    incompativeis = rs.getString(5);
-                    if (incompativeis == null){
-                        ArrayList<String> list = new ArrayList<String>(Arrays.asList(incompativeis.split(",")));
-                        for(String current : list)
-                            ID_incompativeis.add(Integer.valueOf(current));
-                    }
-                    extras = rs.getString(6);
-                    if (extras == null){
-                        ArrayList<String> list = new ArrayList<String>(Arrays.asList(extras.split(",")));
-                        for(String current : list)
-                            ID_extras.add(Integer.valueOf(current));
-                    }                
-                    modelos = rs.getString(7);
-                    if (modelos == null){
-                        ArrayList<String> list = new ArrayList<String>(Arrays.asList(modelos.split(",")));
-                        list.forEach((current) -> {
-                            ID_modelos.add(Integer.valueOf(current));
-                        });
-                    }
-                    tipo = Integer.valueOf(rs.getString(8));
-                    if (tipo == 2){
+                Componente al;                                                                         
+                ID = Integer.valueOf(rs.getString(1));
+                stock = Integer.valueOf(rs.getString(2));
+                price = Double.valueOf(rs.getString(3));
+                name = rs.getString(4);
+                incompativeis = rs.getString(5);
+                if (incompativeis != null){
+                    ArrayList<String> list = new ArrayList<>(Arrays.asList(incompativeis.split(",")));
+                    list.forEach((current) -> {
+                        ID_incompativeis.add(Integer.valueOf(current));
+                    });
+                }
+                extras = rs.getString(6);
+                if (extras != null){
+                    ArrayList<String> list = new ArrayList<>(Arrays.asList(extras.split(",")));
+                    list.forEach((current) -> {
+                        ID_extras.add(Integer.valueOf(current));
+                    });
+                }                
+                modelos = rs.getString(7);
+                if (modelos != null){
+                    ArrayList<String> list = new ArrayList<>(Arrays.asList(modelos.split(",")));
+                    list.forEach((current) -> {
+                        ID_modelos.add(Integer.valueOf(current));
+                    });
+                }
+                tipo = Integer.valueOf(rs.getString(8));
+                switch (tipo) {
+                    case 2:
                         Modelo modelo = new Modelo(ID, name, price, ID_extras, ID_incompativeis);
                         col.add(modelo);
-                    }    
-                    else if (tipo == 3){
+                        break;
+                    case 3:
                         ComponenteAcessorio acessorio = new ComponenteAcessorio(ID, name, price, ID_extras, ID_incompativeis);
                         col.add(acessorio);
-                    }
-                    else if (tipo == 4){
+                        break;
+                    case 4:
                         ComponentePrimario primario = new ComponentePrimario(ID, name, price, ID_extras, ID_incompativeis, ID_modelos);
                         col.add(primario);
-                    }
-                    else{
+                        break;
+                    default:
                         al = new Componente(ID, name, price, ID_extras, ID_incompativeis);
                         col.add(al);
-                    }                    
+                        break;
                 }
             }
             return col;
         }
-        catch (Exception e) {throw new NullPointerException(e.getMessage());}
+        catch (NumberFormatException | SQLException e) {throw new NullPointerException(e.getMessage());}
     }    
 }
 

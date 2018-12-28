@@ -9,10 +9,10 @@ import business.*;
 import java.util.Map;
 import java.util.Set;
 import java.util.Collection;
-import java.util.HashSet;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 /**
  *
  * @author diogo
@@ -45,7 +45,7 @@ public class PacoteDAO implements Map<Integer,Pacote> {
     public boolean containsKey(Object key) throws NullPointerException {
         try {
             Statement stm = conn.createStatement();
-            String sql = "SELECT name FROM Pacote WHERE id='"+(String)key+"'";
+            String sql = "SELECT name FROM Pacote WHERE id='"+ key +"'";
             ResultSet rs = stm.executeQuery(sql);
             return rs.next();
         }
@@ -76,23 +76,23 @@ public class PacoteDAO implements Map<Integer,Pacote> {
             ResultSet rs = stm.executeQuery(sql); 
             
             int id = -1;
-            String nome, componente;
-            double desconto;
+            String nome = "";
+            String componente;
+            double desconto = 0;
             ArrayList<Componente> ID_Componente = new ArrayList<>();
-            if (rs.next())
+            if (rs.next()){
                 id = Integer.valueOf(rs.getString(1));
                 nome = rs.getString(2);
                 desconto = Double.valueOf(rs.getString(3));
                 componente = rs.getString(3);
-                if (componente == null){
+                if (componente != null){
                     ArrayList<String> list = new ArrayList<String>(Arrays.asList(componente.split(",")));
                     for(String current : list){
                         ComponenteDAO con = new ComponenteDAO();                        
                         ID_Componente.add(con.get(Integer.valueOf(current)));
-                        con.CloseDAO();
                     }   
                 }
-                // é necessario adicionar os componentes
+            }
                 al = new Pacote(id, nome, desconto, ID_Componente); 
             return al;
         }
@@ -173,9 +173,36 @@ public class PacoteDAO implements Map<Integer,Pacote> {
 
     @Override
     public Collection<Pacote> values() {
-        throw new NullPointerException("Not implemented!");
+        try {            
+            Collection<Pacote> col = new HashSet<>();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM Pacote");
+            for (;rs.next();) {                    
+                Pacote al;            
+                int id = -1;
+                String nome = "";               
+                double desconto = 0;
+                
+                String componente;
+                ArrayList<Componente> ID_Componente = new ArrayList<>();
+                id = Integer.valueOf(rs.getString(1));
+                nome = rs.getString(2);
+                desconto = Double.valueOf(rs.getString(3));
+                componente = rs.getString(4);
+                if (componente != null){
+                    ArrayList<String> list = new ArrayList<>(Arrays.asList(componente.split(",")));
+                    for(String current : list){
+                        ComponenteDAO con = new ComponenteDAO();
+                        ID_Componente.add(con.get(Integer.valueOf(current)));
+                        con.CloseDAO();
+                    }   
+                }
+                al = new Pacote(id, nome, desconto, ID_Componente);
+                col.add(al);
+            }
+            return col;
+        } catch (NumberFormatException | SQLException e) {throw new NullPointerException(e.getMessage());}    
     }
-
 }
 
     

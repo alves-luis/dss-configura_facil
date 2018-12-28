@@ -74,7 +74,7 @@ public class ModeloDAO implements Map<Integer,Modelo> {
         try {
             Modelo al = null;
             Statement stm = conn.createStatement();
-            String sql = "SELECT * FROM Componente WHERE ID='"+(String)key+"' and Tipo = 2";
+            String sql = "SELECT * FROM Componente WHERE ID='"+ key +"' and Tipo = 2";
             ResultSet rs = stm.executeQuery(sql);
             int ID, stock, tipo;
             double price;
@@ -87,23 +87,25 @@ public class ModeloDAO implements Map<Integer,Modelo> {
             if (rs.next()){
                 ID = Integer.valueOf(rs.getString(1));
                 stock = Integer.valueOf(rs.getString(2));
-                price = Integer.valueOf(rs.getString(3));
+                price = Double.valueOf(rs.getString(3));
                 name = rs.getString(4);
                 incompativeis = rs.getString(5);
-                if (incompativeis == null){
-                    ArrayList<String> list = new ArrayList<String>(Arrays.asList(incompativeis.split(",")));
-                    for(String current : list)
+                if (incompativeis != null){
+                    ArrayList<String> list = new ArrayList<>(Arrays.asList(incompativeis.split(",")));
+                    list.forEach((current) -> {
                         ID_incompativeis.add(Integer.valueOf(current));
+                    });
                 }
                 extras = rs.getString(6);
-                if (extras == null){
-                    ArrayList<String> list = new ArrayList<String>(Arrays.asList(extras.split(",")));
-                    for(String current : list)
+                if (extras != null){
+                    ArrayList<String> list = new ArrayList<>(Arrays.asList(extras.split(",")));
+                    list.forEach((current) -> {
                         ID_extras.add(Integer.valueOf(current));
+                    });
                 }                
                 modelos = rs.getString(7);
-                if (modelos == null){
-                    ArrayList<String> list = new ArrayList<String>(Arrays.asList(modelos.split(",")));
+                if (modelos != null){
+                    ArrayList<String> list = new ArrayList<>(Arrays.asList(modelos.split(",")));
                     list.forEach((current) -> {
                         ID_modelos.add(Integer.valueOf(current));
                     });
@@ -140,7 +142,7 @@ public class ModeloDAO implements Map<Integer,Modelo> {
         try {
             Modelo al = null;
             Statement stm = conn.createStatement();
-            stm.executeUpdate("DELETE FROM Componente WHERE ID='"+ Integer.toString(key) +"'");
+            stm.executeUpdate("DELETE FROM Componente WHERE ID='"+ key +"'");
             String modelos = "null";
             StringBuilder extras = new StringBuilder();
             StringBuilder incompativeis = new StringBuilder();
@@ -200,7 +202,7 @@ public class ModeloDAO implements Map<Integer,Modelo> {
     @Override
     public Collection<Modelo> values() {
         try {
-            Collection<Modelo> col = new HashSet<Modelo>();
+            Collection<Modelo> col = new HashSet<>();
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery("SELECT * FROM Componente WHERE Tipo = 2");
             for (;rs.next();) {                    
@@ -211,40 +213,40 @@ public class ModeloDAO implements Map<Integer,Modelo> {
                 ArrayList<Integer> ID_extras = new ArrayList<>();
                 ArrayList<Integer> ID_modelos = new ArrayList<>();
             
-                Integer s;
-                if (rs.next()){
-                    Modelo al;                                    
-                    ID = Integer.valueOf(rs.getString(1));
-                    stock = Integer.valueOf(rs.getString(2));
-                    price = Integer.valueOf(rs.getString(3));
-                    name = rs.getString(4);
-                    incompativeis = rs.getString(5);
-                    if (incompativeis == null){
-                        ArrayList<String> list = new ArrayList<String>(Arrays.asList(incompativeis.split(",")));
-                        for(String current : list)
-                            ID_incompativeis.add(Integer.valueOf(current));
-                    }
-                    extras = rs.getString(6);
-                    if (extras == null){
-                        ArrayList<String> list = new ArrayList<String>(Arrays.asList(extras.split(",")));
-                        for(String current : list)
-                            ID_extras.add(Integer.valueOf(current));
-                    }                
-                    modelos = rs.getString(7);
-                    if (modelos == null){
-                        ArrayList<String> list = new ArrayList<String>(Arrays.asList(modelos.split(",")));
-                        list.forEach((current) -> {
-                            ID_modelos.add(Integer.valueOf(current));
-                        });
-                    }
-                    tipo = Integer.valueOf(rs.getString(8));
-                    al = new Modelo(ID, name, price, ID_extras, ID_incompativeis); 
-                    col.add(al);
+                Modelo al;                                    
+                ID = Integer.valueOf(rs.getString(1));
+                stock = Integer.valueOf(rs.getString(2));
+                price = Double.valueOf(rs.getString(3));
+                name = rs.getString(4);
+                incompativeis = rs.getString(5);
+                if (incompativeis != null){
+                    ArrayList<String> list = new ArrayList<>(Arrays.asList(incompativeis.split(",")));
+                    list.forEach((current) -> {
+                        ID_incompativeis.add(Integer.valueOf(current));
+                    });
                 }
+                extras = rs.getString(6);
+                if (extras == null){
+                    ArrayList<String> list = new ArrayList<>(Arrays.asList(extras.split(",")));
+                    list.forEach((current) -> {
+                        ID_extras.add(Integer.valueOf(current));
+                    });
+                }                
+                modelos = rs.getString(7);
+                if (modelos == null){
+                    ArrayList<String> list;
+                    list = new ArrayList<>(Arrays.asList(modelos.split(",")));
+                    list.forEach((current) -> {
+                        ID_modelos.add(Integer.valueOf(current));
+                    });
+                }
+                tipo = Integer.valueOf(rs.getString(8));
+                al = new Modelo(ID, name, price, ID_extras, ID_incompativeis); 
+                col.add(al);              
             }
             return col;
         }
-        catch (Exception e) {throw new NullPointerException(e.getMessage());}
+        catch (NumberFormatException | SQLException e) {throw new NullPointerException(e.getMessage());}
     }    
 
 }
