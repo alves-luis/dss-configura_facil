@@ -21,8 +21,8 @@ INSERT INTO DSS.Componente values(1,6, 350, 'TurboCompressor', "2",null,null,3);
 INSERT INTO DSS.Componente values(2,8, 280, 'SuperCompressor', "1",null,null,3);
 
 # Motor
-INSERT INTO DSS.Componente values(3,3,     500, 'Motor Turbo',    "3,4,5,6,7,8,9,100","1",null,2);
-INSERT INTO DSS.Componente values(4,7,     450, 'Motor 2.0',        "3,4,5,6,7,8,9,100","2",null,2);
+INSERT INTO DSS.Componente values(3,3,     500, 'Motor Turbo',    "2,3,4,5,6,7,8,9,100","1",null,2);
+INSERT INTO DSS.Componente values(4,7,     450, 'Motor 2.0',        "1,3,4,5,6,7,8,9,100","2",null,2);
 INSERT INTO DSS.Componente values(5,20,   400, 'Motor 1.8',        "3,4,5,6,7,8,9,100",null,null,2);
 INSERT INTO DSS.Componente values(6,40,   350, 'Motor 1.6',        "3,4,5,6,7,8,9,100",null,null,2);
 INSERT INTO DSS.Componente values(7,100, 300, 'Motor 1.4',        "3,4,5,6,7,8,9,100",null,null,2);
@@ -30,9 +30,9 @@ INSERT INTO DSS.Componente values(8,100, 250, 'Motor 1.0',        "3,4,5,6,7,8,9
 INSERT INTO DSS.Componente values(9,50,   500, 'Motor Elétrico', "3,4,5,6,7,8,9,100","79",null,2);
 
 # PNEU
-INSERT INTO DSS.Componente values(10,20, 100, 'Pneus largos',                           "10,11,12,13,14,15,16,17,101","57",null,2);
-INSERT INTO DSS.Componente values(11,30, 70,   'Pneus XL',                                "10,11,12,13,14,15,16,17,101","58",null,2);
-INSERT INTO DSS.Componente values(12,50, 80,   'Pneus de baixo perfil',              "10,11,12,13,14,15,16,17,101","61",null,2);
+INSERT INTO DSS.Componente values(10,20, 100, 'Pneus largos',                           "10,11,12,13,14,15,16,17,101,58,59,60,61","57",null,2);
+INSERT INTO DSS.Componente values(11,30, 70,   'Pneus XL',                                "10,11,12,13,14,15,16,17,101,57,59,60,61","58",null,2);
+INSERT INTO DSS.Componente values(12,50, 80,   'Pneus de baixo perfil',              "10,11,12,13,14,15,16,17,101,57,58,59,60","61",null,2);
 INSERT INTO DSS.Componente values(13,70, 40,   'Pneus usados',                         "10,11,12,13,14,15,16,17,101",null,null,2);
 INSERT INTO DSS.Componente values(14,20, 45,   'Pneus recauchutados',             "10,11,12,13,14,15,16,17,101",null,null,2);
 INSERT INTO DSS.Componente values(15,50, 60,   'Pneus de verão',                       "10,11,12,13,14,15,16,17,101",null,null,2);
