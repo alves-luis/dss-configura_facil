@@ -122,11 +122,13 @@ public class ApresentaPrecoPacote extends javax.swing.JPanel {
 
   private void confirmarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarButtonActionPerformed
     this.facade.confirmaComponentes();
+    this.parent.dispose();
     (new MenuEscolha(facade)).setVisible(true);
   }//GEN-LAST:event_confirmarButtonActionPerformed
 
   private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
     this.facade.cancelaConfiguracao();
+    this.parent.dispose();
     (new MenuEscolha(facade)).setVisible(true);
   }//GEN-LAST:event_cancelarButtonActionPerformed
 

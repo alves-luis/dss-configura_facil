@@ -65,11 +65,6 @@ public class ListaPacotes extends javax.swing.JPanel {
       public int getSize() { return strings.length; }
       public String getElementAt(int i) { return strings[i]; }
     });
-    listaComponentes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-      public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-        listaComponentesValueChanged(evt);
-      }
-    });
     scrollListaComponentes.setViewportView(listaComponentes);
 
     butaoSair.setText("Sair");
@@ -154,12 +149,6 @@ public class ListaPacotes extends javax.swing.JPanel {
     );
   }// </editor-fold>//GEN-END:initComponents
 
-  private void listaComponentesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaComponentesValueChanged
-    if (!evt.getValueIsAdjusting()) {
-      butaoSelecionar.setEnabled(true);
-    }
-  }//GEN-LAST:event_listaComponentesValueChanged
-
   private void butaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoSairActionPerformed
     this.parent.dispose();
     this.facade.cancelaConfiguracao();
@@ -184,6 +173,7 @@ public class ListaPacotes extends javax.swing.JPanel {
 
   private void listaPacotesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaPacotesValueChanged
     if (!evt.getValueIsAdjusting()) {
+      butaoSelecionar.setEnabled(true);
       int row = listaPacotes.getSelectedIndex();
       if (row == -1)
         return;

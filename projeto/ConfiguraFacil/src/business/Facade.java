@@ -113,15 +113,11 @@ public class Facade {
     this.compAcessorios.add(b10);
     this.compAcessorios.add(b11);
     //Pacotes
-    new Pacote(0, "Sport", 0.8);
-    /*
-    Pacote sport= new Pacote();
-    sport.packSport(this);
-    Pacote confort= new Pacote();
-    confort.packConfort(this);
-    this.pacotes.add(sport);
-    this.pacotes.add(confort);
-    */
+    ArrayList<Componente> parts = new ArrayList<>();
+    parts.add(b11);
+    parts.add(b10);
+    Pacote sport = new Pacote(0, "Sport", 0.2,parts);
+    this.pacotes.put(0,sport);
   }
 
   /**
