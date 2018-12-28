@@ -72,7 +72,7 @@ public class PacoteDAO implements Map<Integer,Pacote> {
         try {
             Pacote al = null;
             Statement stm = conn.createStatement();
-            String sql = "SELECT * FROM Pacote WHERE ID='"+(String)key+"'";
+            String sql = "SELECT * FROM Pacote WHERE ID='"+ key +"'";
             ResultSet rs = stm.executeQuery(sql); 
             
             int id = -1;
@@ -84,7 +84,7 @@ public class PacoteDAO implements Map<Integer,Pacote> {
                 id = Integer.valueOf(rs.getString(1));
                 nome = rs.getString(2);
                 desconto = Double.valueOf(rs.getString(3));
-                componente = rs.getString(3);
+                componente = rs.getString(4);
                 if (componente != null){
                     ArrayList<String> list = new ArrayList<String>(Arrays.asList(componente.split(",")));
                     for(String current : list){

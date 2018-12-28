@@ -226,14 +226,14 @@ public class ModeloDAO implements Map<Integer,Modelo> {
                     });
                 }
                 extras = rs.getString(6);
-                if (extras == null){
+                if (extras != null){
                     ArrayList<String> list = new ArrayList<>(Arrays.asList(extras.split(",")));
                     list.forEach((current) -> {
                         ID_extras.add(Integer.valueOf(current));
                     });
                 }                
                 modelos = rs.getString(7);
-                if (modelos == null){
+                if (modelos != null){
                     ArrayList<String> list;
                     list = new ArrayList<>(Arrays.asList(modelos.split(",")));
                     list.forEach((current) -> {
