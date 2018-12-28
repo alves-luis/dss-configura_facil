@@ -25,8 +25,8 @@ public class Componente implements Comparable<Componente> {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.extras = new ArrayList<>();
-        this.incompativeis = new ArrayList<>();
+        this.extras = extras;
+        this.incompativeis = incompativeis;
         stock = 0;
     }
 
