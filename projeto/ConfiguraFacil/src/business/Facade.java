@@ -112,7 +112,8 @@ public class Facade {
     this.compAcessorios.add(b9);
     this.compAcessorios.add(b10);
     this.compAcessorios.add(b11);
-        //Pacotes
+    //Pacotes
+    new Pacote(0, "Sport", 0.8);
     /*
     Pacote sport= new Pacote();
     sport.packSport(this);
@@ -373,8 +374,30 @@ public class Facade {
     return this.currentConfig.getTemporarySelected();
   }
   
+  /**
+   * This method of returning final Price is terrible. Just saying
+   */
   public double getPrecoFinal() {
-    return this.currentConfig.getFinalPrice();
+    double priceWithoutPack = this.currentConfig.getFinalPrice();
+    List<Componente> selected = this.currentConfig.getSelected();
+    for(Pacote p : this.pacotes.values()) {
+      boolean all = true;
+      double priceSum = 0;
+      for(Componente c : p.getComponentes()) {
+        if (!selected.contains(c)) {
+          all = false;
+          break;
+        }
+        else
+          priceSum += c.getPrice();
+      }
+      if (all) {
+        double pricePack = p.getPreco();
+        priceWithoutPack -= priceSum;
+        priceWithoutPack += pricePack;
+      }
+    }
+    return priceWithoutPack;
   }
 
   public List<Componente> getSelecionados() {
