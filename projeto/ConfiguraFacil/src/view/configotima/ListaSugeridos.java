@@ -48,7 +48,7 @@ public class ListaSugeridos extends javax.swing.JPanel {
     });
     double otim = sug.stream().mapToDouble(c -> c.getPrice()).sum();
     this.labelGetPrecoConfig.setText(otim+"");
-    this.labelGetPrecoTot.setText(facade.getPrecoTemporario()+"");
+    this.labelGetPrecoTot.setText(facade.getPrecoFinal()+otim+"");
   }
 
   /**
