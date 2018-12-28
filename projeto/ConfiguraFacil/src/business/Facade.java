@@ -3,6 +3,7 @@ package business;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -130,6 +131,7 @@ public class Facade {
     List<Componente> result = new ArrayList<>();
     TreeSet<ComponenteAcessorio> orderedComps = new TreeSet<>(Comparator.reverseOrder());
     List<ComponenteAcessorio> aces = this.getSecundariosSelecionaveis();
+    Set<Integer> incomps = new HashSet<>();
     
     for(ComponenteAcessorio c : aces)
       if (c.getPrice() <= val)
@@ -139,21 +141,24 @@ public class Facade {
     
     while (sum < val && orderedComps.size() > 0) {
       ComponenteAcessorio candidate = orderedComps.first();
-      double value = candidate.getPrice();
-      List<Integer> extra = candidate.getExtra();
-      List<ComponenteAcessorio> listExtra = new ArrayList<>();
-      for(Integer id : extra) {
-        ComponenteAcessorio compExtra = (ComponenteAcessorio) this.componentes.get(id);
-        value += compExtra.getPrice();
-        listExtra.add(compExtra);
-      }
-      if (value + sum <= val) {
-        result.add(candidate);
-        if (!listExtra.isEmpty())
-          result.addAll(listExtra);
-        sum += value;
-        for(ComponenteAcessorio c : listExtra)
-          orderedComps.remove(c);
+      if (!incomps.contains(candidate.getCod())) {
+        double value = candidate.getPrice();
+        List<Integer> extra = candidate.getExtra();
+        List<ComponenteAcessorio> listExtra = new ArrayList<>();
+        for(Integer id : extra) {
+          ComponenteAcessorio compExtra = (ComponenteAcessorio) this.componentes.get(id);
+          value += compExtra.getPrice();
+          listExtra.add(compExtra);
+        }
+        if (value + sum <= val) {
+          result.add(candidate);
+          incomps.addAll(candidate.getIncompatible());
+          if (!listExtra.isEmpty())
+            result.addAll(listExtra);
+          sum += value;
+          for(ComponenteAcessorio c : listExtra)
+            orderedComps.remove(c);
+        }
       }
       orderedComps.remove(candidate);
     }
