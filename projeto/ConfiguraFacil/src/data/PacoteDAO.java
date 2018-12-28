@@ -178,9 +178,9 @@ public class PacoteDAO implements Map<Integer,Pacote> {
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery("SELECT * FROM Pacote");
             for (;rs.next();) {                    
-                Pacote al;            
+                Pacote al;
                 int id = -1;
-                String nome = "";               
+                String nome = "";
                 double desconto = 0;
                 
                 String componente;
@@ -195,13 +195,13 @@ public class PacoteDAO implements Map<Integer,Pacote> {
                         ComponenteDAO con = new ComponenteDAO();
                         ID_Componente.add(con.get(Integer.valueOf(current)));
                         con.CloseDAO();
-                    }   
+                    }
                 }
                 al = new Pacote(id, nome, desconto, ID_Componente);
                 col.add(al);
             }
             return col;
-        } catch (NumberFormatException | SQLException e) {throw new NullPointerException(e.getMessage());}    
+        } catch (NumberFormatException | SQLException e) {throw new NullPointerException(e.getMessage());}
     }
 }
 

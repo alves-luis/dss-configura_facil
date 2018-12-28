@@ -55,6 +55,17 @@ public class Pacote {
     return this.id;
   }
 
+    public Pacote clone(){
+        int i = this.id;
+        String n = this.nome;
+        double d = this.desconto;
+        ArrayList<Componente> t = new ArrayList<>();
+        for(Componente s: this.componentes){
+            t.add(s);
+        }           
+        return new Pacote(i,n,d,t);
+    }
+    
     public double getDesconto() {
         return this.desconto;
     }

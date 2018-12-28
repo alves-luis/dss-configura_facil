@@ -29,6 +29,16 @@ public class Facade {
         this.compPrimarios = new ArrayList<>();
         this.compAcessorios = new ArrayList<>();
         
+        ArrayList<Pacote> p = new ArrayList<>(this.pacotes.values());
+        for (Pacote s : p){
+            System.out.println("------------" + s.getName() +  "------------");
+            if(s != null){
+                for(Componente r : s.getComponentes()){
+                    System.out.println(r.getName());
+                }
+            }
+        }
+        
         ArrayList<Componente> comp = new ArrayList<>(this.componentes.values());
         for (int i = 0; i < comp.size(); i++) {
             if(comp.get(i).getClass() == ComponenteAcessorio.class)
@@ -448,6 +458,13 @@ public class Facade {
     return r;
   }
 
+  public Pacote getPacoteWithString(String i){
+        ArrayList<Pacote> p = new ArrayList<>(this.pacotes.values());
+        for (Pacote s : p)
+            if(i.equals(s.getName()))
+                return s.clone();
+        return null;
+  }
   /**
    * Returns all the available packages.
    */

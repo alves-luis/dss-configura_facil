@@ -158,7 +158,7 @@ public class ListaPacotes extends javax.swing.JPanel {
   private void butaoSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoSelecionarActionPerformed
 
     int pack = listaPacotes.getSelectedIndex();
-    CardLayout cl = (CardLayout) cardPanel.getLayout();
+    CardLayout cl = (CardLayout) cardPanel.getLayout();   
     Pacote pacote = facade.getPacotes().get(pack);
     List<Componente> incompatible = facade.getIncompativeisFromSelected(pacote);
     if (incompatible.size() > 0) {
@@ -174,10 +174,12 @@ public class ListaPacotes extends javax.swing.JPanel {
   private void listaPacotesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaPacotesValueChanged
     if (!evt.getValueIsAdjusting()) {
       butaoSelecionar.setEnabled(true);
-      int row = listaPacotes.getSelectedIndex();
-      if (row == -1)
+      String row = listaPacotes.getSelectedValue();
+      if (row == null)
         return;
-      Pacote p = facade.getPacotes().get(row);
+      Pacote p = facade.getPacoteWithString(row);
+      if(p == null)
+          return;
       int idPack = p.getId();
       List<Componente> selecionaveis = facade.getComponentes(idPack);
 
