@@ -71,16 +71,20 @@ public class ApresentaPrecoPacote extends javax.swing.JPanel {
     jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
     jLabel1.setText("Preço normal");
 
+    precoSemPack.setBackground(new java.awt.Color(255, 255, 255));
     precoSemPack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     precoSemPack.setText("jLabel2");
     precoSemPack.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    precoSemPack.setOpaque(true);
 
     jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
     jLabel3.setText("Preço pacote");
 
+    precoPack.setBackground(new java.awt.Color(255, 255, 255));
     precoPack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     precoPack.setText("jLabel2");
     precoPack.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    precoPack.setOpaque(true);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
