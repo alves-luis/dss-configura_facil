@@ -33,20 +33,20 @@
                   <Component id="labelSelecionados" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="scrollListaSelecionados" alignment="2" min="-2" pref="213" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="labelPreco" alignment="2" min="-2" pref="114" max="-2" attributes="0"/>
                   <Component id="butaoAdicionarMais" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="labelPreco" alignment="2" max="32767" attributes="0"/>
                   <Component id="labelPrecoAtual" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="236" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
               <Component id="butaoConfirmar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="butaoSair" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="28" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,12 +61,12 @@
                       <Component id="labelPrecoAtual" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="labelPreco" min="-2" pref="34" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="butaoAdicionarMais" min="-2" pref="53" max="-2" attributes="0"/>
                   </Group>
                   <Component id="scrollListaSelecionados" alignment="0" min="-2" pref="188" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="butaoConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="butaoSair" alignment="3" min="-2" max="-2" attributes="0"/>
