@@ -70,6 +70,33 @@ public class Pacote {
         return this.desconto;
     }
 
+  @Override
+  public int hashCode() {
+    int hash = 7;
+    hash = 47 * hash + this.id;
+    return hash;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final Pacote other = (Pacote) obj;
+    if (this.id != other.id) {
+      return false;
+    }
+    return true;
+  }
+    
+    
+
 }
 /**
   public void packSport(Facade f) {

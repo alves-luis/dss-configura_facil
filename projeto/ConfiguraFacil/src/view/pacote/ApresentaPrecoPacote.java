@@ -21,19 +21,19 @@ public class ApresentaPrecoPacote extends javax.swing.JPanel {
   private Facade facade;
   private SelecionaPacote parent;
   private JPanel cardPanel;
-  private Pacote pack;
+  private int pack;
   
   /**
    * Creates new form ApresentaPrecoPacote
    */
-  public ApresentaPrecoPacote(Facade f, SelecionaPacote par, Pacote pack) {
+  public ApresentaPrecoPacote(Facade f, SelecionaPacote par, int pack) {
     initComponents();
     this.facade = f;
     this.parent = par;
     this.cardPanel = parent.getCardPanel();
     this.pack = pack;
-    double priceNoDisc = pack.getComponentes().stream().mapToDouble(c -> c.getPrice()).sum();
-    double priceDisc = pack.getPreco();
+    double priceNoDisc = f.getComponentes(pack).stream().mapToDouble(c -> c.getPrice()).sum();
+    double priceDisc = f.getPacote(pack).getPreco();
     this.precoSemPack.setText(priceNoDisc + "");
     this.precoPack.setText(priceDisc +"");
   }

@@ -135,7 +135,7 @@ public class ListaPacoteIncompativeis extends javax.swing.JPanel {
   private void butaoRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoRetirarActionPerformed
     facade.removeComponente(incomp);
     facade.adicionaCompTemporario(pack);
-    cardPanel.add(new ApresentaPrecoPacote(facade,parent,pack),"PRECO");
+    cardPanel.add(new ApresentaPrecoPacote(facade,parent,pack.getId()),"PRECO");
     CardLayout cl = (CardLayout) cardPanel.getLayout();
     cl.show(cardPanel,"PRECO");
   }//GEN-LAST:event_butaoRetirarActionPerformed

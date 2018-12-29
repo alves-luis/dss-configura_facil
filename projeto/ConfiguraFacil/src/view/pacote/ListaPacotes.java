@@ -166,7 +166,7 @@ public class ListaPacotes extends javax.swing.JPanel {
       cl.show(cardPanel, "INCOMPATIVEL");
     } else {
       facade.adicionaCompTemporario(pacote);
-      cardPanel.add(new ApresentaPrecoPacote(facade, parent,pacote), "PRECO");
+      cardPanel.add(new ApresentaPrecoPacote(facade, parent,pacote.getId()), "PRECO");
       cl.show(cardPanel, "PRECO");
     }
   }//GEN-LAST:event_butaoSelecionarActionPerformed
