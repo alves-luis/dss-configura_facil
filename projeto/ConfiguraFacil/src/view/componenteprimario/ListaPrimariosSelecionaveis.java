@@ -23,6 +23,7 @@ public class ListaPrimariosSelecionaveis extends javax.swing.JPanel {
     private Facade facade;
     private SelecionaComponentePrimario parent;
     private JPanel cardPanel;
+    private List<ComponentePrimario> selecionaveis;
     
     /**
      * Creates new form ListaPrimariosSelecionaveis
@@ -34,6 +35,7 @@ public class ListaPrimariosSelecionaveis extends javax.swing.JPanel {
     initComponents();
     this.parent.setTitle("Componentes Selecionáveis");
     List<ComponentePrimario> primario = facade.getPrimariosSelecionaveis();
+    this.selecionaveis = primario;
     String[] comps = new String[primario.size()];
     for (int i = 0; i < comps.length; i++) {
       comps[i] = primario.get(i).getName();
@@ -177,7 +179,7 @@ public class ListaPrimariosSelecionaveis extends javax.swing.JPanel {
       int comp = listaComponentes.getSelectedIndex();
       int mod = listaModelos.getSelectedIndex();
       CardLayout cl = (CardLayout) cardPanel.getLayout();
-      ComponentePrimario prim = facade.getPrimariosSelecionaveis().get(comp);
+      ComponentePrimario prim = this.selecionaveis.get(comp);
       Modelo modelo = facade.getModelo(prim.getModelos().get(mod));
       List<Componente> extra = facade.getExtra(modelo.getCod());
       List<Componente> incompatible = facade.getIncompativeisFromSelected(modelo.getCod());

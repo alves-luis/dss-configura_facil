@@ -30,14 +30,6 @@ public class Facade {
         this.compAcessorios = new ArrayList<>();
         
         ArrayList<Pacote> p = new ArrayList<>(this.pacotes.values());
-        for (Pacote s : p){
-            System.out.println("------------" + s.getName() +  "------------");
-            if(s != null){
-                for(Componente r : s.getComponentes()){
-                    System.out.println(r.getName());
-                }
-            }
-        }
         
         ArrayList<Componente> comp = new ArrayList<>(this.componentes.values());
         for (int i = 0; i < comp.size(); i++) {
@@ -47,111 +39,6 @@ public class Facade {
                 this.compPrimarios.add((ComponentePrimario) comp.get(i));
 	}      
     } 
-/*    
-  public Facade() {
-    modelos = new HashMap<>();
-    componentes = new HashMap<>();
-    currentConfig = new Configuracao();
-    compPrimarios = new ArrayList<>();
-    compAcessorios = new ArrayList<>();
-    pacotes= new HashMap<>();
-    ComponentePrimario c1 = new ComponentePrimario(0, "Motor", 0);
-    ComponentePrimario c2 = new ComponentePrimario(1, "Pneu", 0);
-    ComponentePrimario c3 = new ComponentePrimario(2, "Transmissão", 0);
-    Modelo m1 = new Modelo(3,"Motor V6",7500);
-    Modelo m2 = new Modelo(4,"Pneu Extra-Fino",300);
-    Modelo m3 = new Modelo(5,"Transmissão Automática",2000);
-    Modelo m4 = new Modelo(6,"Motor V3",5000);
-    m1.addIncompatibility(0);
-    m1.addIncompatibility(3);
-    m2.addIncompatibility(4);
-    m2.addIncompatibility(1);
-    m3.addIncompatibility(5);
-    m3.addIncompatibility(2);
-    m3.addIncompatibility(6);
-    m4.addIncompatibility(0);
-    m4.addIncompatibility(3);
-    m4.addIncompatibility(5);
-    m4.addIncompatibility(6);
-    c1.addModelo(m1);
-    c2.addModelo(m2);
-    c3.addModelo(m3);
-    c1.addModelo(m4);
-    this.modelos.put(3, m1);
-    this.modelos.put(4, m2);
-    this.modelos.put(5, m3);
-    this.modelos.put(6, m4);
-    this.componentes.put(3, m1);
-    this.componentes.put(4,m2);
-    this.componentes.put(5, m3);
-    this.componentes.put(6, m4);
-    this.componentes.put(0, c1);
-    this.componentes.put(1, c2);
-    this.componentes.put(2, c3);
-    this.compPrimarios.add(c1);
-    this.compPrimarios.add(c2);
-    this.compPrimarios.add(c3);
-    //ACESSORIO
-    ComponenteAcessorio b1 = new ComponenteAcessorio(22, "Para-Brisas Fixe", 200);
-    ComponenteAcessorio b2 = new ComponenteAcessorio(23, "Escovas Super-Limpeza", 300);
-    ComponenteAcessorio b3 = new ComponenteAcessorio(24,"Kit mãos-livres com interface USB", 100);
-    ComponenteAcessorio b4 = new ComponenteAcessorio(25,"Informação de trânsito em tempo real",165);
-    ComponenteAcessorio b5 = new ComponenteAcessorio(26,"Sistema de navegação Professional",1650);
-    ComponenteAcessorio b6 = new ComponenteAcessorio(27,"Sistema de som HiFi",305);
-    ComponenteAcessorio b7 = new ComponenteAcessorio(28,"Sistema de som Harman Kardon",800);
-    ComponenteAcessorio b8 = new ComponenteAcessorio(29,"Para-brisas com faixa cinza",95);
-    ComponenteAcessorio b9 = new ComponenteAcessorio(30,"Dispositivo de acoplamento de reboque",840);
-    ComponenteAcessorio b10 = new ComponenteAcessorio(31,"Travão desportivo",640);
-    ComponenteAcessorio b11 = new ComponenteAcessorio(32,"Traseira Rebaixada",739);
-    b1.addIncompatibility(22);
-    b2.addIncompatibility(23);
-    b3.addIncompatibility(24);
-    b4.addIncompatibility(25);
-    b4.addIncompatibility(26);
-    b5.addIncompatibility(26);
-    b5.addIncompatibility(25);
-    b6.addIncompatibility(27);
-    b6.addIncompatibility(28);
-    b7.addIncompatibility(28);
-    b7.addIncompatibility(27);
-    b8.addIncompatibility(29);
-    b8.addExtra(22);
-    b9.addIncompatibility(30);
-    b9.addExtra(31);
-    b9.addIncompatibility(32);
-    b10.addIncompatibility(31);
-    b11.addIncompatibility(30);
-    b11.addIncompatibility(32);
-    this.componentes.put(22,b1);
-    this.componentes.put(23,b2);
-    this.componentes.put(24,b3);
-    this.componentes.put(25,b4);
-    this.componentes.put(26,b5);
-    this.componentes.put(27,b6);
-    this.componentes.put(28,b7);
-    this.componentes.put(29,b8);
-    this.componentes.put(30,b9);
-    this.componentes.put(31,b10);
-    this.componentes.put(32,b11);
-    this.compAcessorios.add(b1);
-    this.compAcessorios.add(b2);
-    this.compAcessorios.add(b3);
-    this.compAcessorios.add(b4);
-    this.compAcessorios.add(b5);
-    this.compAcessorios.add(b6);
-    this.compAcessorios.add(b7);
-    this.compAcessorios.add(b8);
-    this.compAcessorios.add(b9);
-    this.compAcessorios.add(b10);
-    this.compAcessorios.add(b11);
-    //Pacotes
-    ArrayList<Componente> parts = new ArrayList<>();
-    parts.add(b11);
-    parts.add(b10);
-    Pacote sport = new Pacote(0, "Sport", 0.2,parts);
-    this.pacotes.put(0,sport);
-  }
-*/
   /**
    * This methods returns a list of components that make up a quasi-optimal config
    * Uses constructive heuristic
