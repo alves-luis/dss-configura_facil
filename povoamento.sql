@@ -1,6 +1,5 @@
 ##                               								 ID  STOCK PRICE NAME ID_Incompativeis  ID_extras ID_modelos, Tipo
 
-
 ##### ID_Incompativeis -> Indica os componentes incompativeis ao escolher este
 
 ##### ID_extras -> Indica se para ter um determinado componente que extras é preciso ter
@@ -149,8 +148,3 @@ INSERT INTO DSS.Pacote values(4, 'Segurança', 0,"52,53,54");
 INSERT INTO DSS.Pacote values(5, 'Tech', 0,"55,79,42,36,37,38,35");
 INSERT INTO DSS.Pacote values(6, 'Tuga', 0,"80,81");
 INSERT INTO DSS.Pacote values(7, 'Avec', 0,"80,82");
-
-# DELETE FROM Componente;
-# DELETE FROM Pacote;
-# select * from Componente;
-# select * from Pacote;

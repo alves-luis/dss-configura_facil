@@ -1,10 +1,9 @@
+create schema DSS;
+
 USE `DSS`;
 
 # DROP TABLE Componente;
-# DROP TABLE Modelo;
 # DROP TABLE Pacotes;
-# DROP TABLE Modelo_Componente;
-# DROP TABLE Pacote_Componente;
 
 CREATE TABLE Componente (
     ID INTEGER PRIMARY KEY,
