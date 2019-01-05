@@ -14,11 +14,11 @@ import java.sql.SQLException;
  * @author diogo
  */
 public class Connect {
- 
+    
     public Connection Connect(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/DSS", "username", "password"); //Add mysql username and password in ""
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/DSS", "root", "root"); //Add mysql username and password in ""
             return conn;
         }
         catch (ClassNotFoundException | SQLException e) {}    
